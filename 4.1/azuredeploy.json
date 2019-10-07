@@ -4,10 +4,6 @@
   "parameters" : {
     "image" : {
       "type" : "string",
-      "allowedValues" : [
-        "rhcos-410.8.20190504.0-azure.vhd"
-      ],
-      "defaultValue" : "rhcos-410.8.20190504.0-azure.vhd",
       "metadata" : {
         "description" : "OS to use.Red Hat Enterprise Linux"
       }

@@ -17,6 +17,7 @@
 #~/azlogin.sh
 #az group delete --name gswx1
 #az group create --name gswx1 --location "East US"
+python setup-variables.py
 az group deployment create \
    --name gswx1 \
    --resource-group gswx1 \
