@@ -534,7 +534,7 @@
             "value" : "[variables('baseTemplateUrl')]"
           },
           "imageReference" : {
-            "value" : "[variables(parameters('image'))]"
+            "value" : "[parameters('image')]"
           },
           "masterLoadBalancerName" : {
             "value" : "[variables('masterLoadBalancerName')]"
