@@ -88,9 +88,11 @@
           }
         },
         "storageProfile" : {
-          "imageReference" : "[parameters('imageReference')]",
           "osDisk" : {
             "name" : "osdisk",
+            "image" : {
+              "uri" : "[parameters('imageReference')]"
+            },
             "vhd" : {
               "uri" : "[concat('http://', parameters('sa'), '.blob.core.windows.net/openshiftvmachines/', parameters('vmName'), '.vhd')]"
             },
