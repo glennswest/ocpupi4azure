@@ -104,6 +104,7 @@
         "storageProfile" : {
           "osDisk" : {
             "name" : "osdisk",
+            "osType" : "Linux",
             "image" : {
               "uri" : "[parameters('imageReference')]"
             },
