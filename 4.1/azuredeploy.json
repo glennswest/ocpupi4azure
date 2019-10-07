@@ -201,7 +201,6 @@
     "mastersubnetName" : "masterSubnet",
     "mastersubnetPrefix" : "10.0.0.0/24",
     "nodeStorageName" : "[concat('sa', resourceGroup().name)]",
-    "masterStorageName" : "[concat('sa', resourceGroup().name)]",
     "vhdStorageType" : "Premium_LRS",
     "vnetId" : "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
     "nodeSubnetRef" : "[concat(variables('vnetId'), '/subnets/', variables('nodesubnetName'))]",
@@ -456,18 +455,6 @@
       }
     },
     {
-      "type" : "Microsoft.Storage/storageAccounts",
-      "name" : "[variables('masterStorageName')]",
-      "apiVersion" : "[variables('apiVersion')]",
-      "location" : "[variables('location')]",
-      "tags" : {
-        "displayName" : "StorageAccount"
-      },
-      "properties" : {
-        "accountType" : "[variables('vmSizesMap')[parameters('masterVMSize')].storageAccountType]"
-      }
-    },
-    {
       "apiVersion" : "[variables('apiVersion')]",
       "type" : "Microsoft.Network/virtualNetworks",
       "name" : "[variables('virtualNetworkName')]",
@@ -503,7 +490,7 @@
       "apiVersion" : "2015-01-01",
       "dependsOn" : [
         "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('masterStorageName'))]"
+        "[concat('Microsoft.Storage/storageAccounts/', variables('nodeStorageName'))]"
       ],
       "properties" : {
         "mode" : "Incremental",
@@ -519,7 +506,7 @@
             "value" : "[concat(resourceGroup().name,'m1')]"
           },
           "sa" : {
-            "value" : "[variables('masterStorageName')]"
+            "value" : "[variables('nodeStorageName')]"
           },
           "subnetRef" : {
             "value" : "[variables('masterSubnetRef')]"
@@ -597,7 +584,7 @@
       "apiVersion" : "2015-01-01",
       "dependsOn" : [
         "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('masterStorageName'))]"
+        "[concat('Microsoft.Storage/storageAccounts/', variables('nodeStorageName'))]"
       ],
       "properties" : {
         "mode" : "Incremental",
@@ -613,7 +600,7 @@
             "value" : "[concat(resourceGroup().name,'m1')]"
           },
           "sa" : {
-            "value" : "[variables('masterStorageName')]"
+            "value" : "[variables('nodeStorageName')]"
           },
           "subnetRef" : {
             "value" : "[variables('masterSubnetRef')]"
@@ -645,7 +632,7 @@
       "apiVersion" : "2015-01-01",
       "dependsOn" : [
         "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('masterStorageName'))]"
+        "[concat('Microsoft.Storage/storageAccounts/', variables('nodeStorageName'))]"
       ],
       "properties" : {
         "mode" : "Incremental",
@@ -661,7 +648,7 @@
             "value" : "[concat(resourceGroup().name,'m2')]"
           },
           "sa" : {
-            "value" : "[variables('masterStorageName')]"
+            "value" : "[variables('nodeStorageName')]"
           },
           "subnetRef" : {
             "value" : "[variables('masterSubnetRef')]"
@@ -696,7 +683,7 @@
       "apiVersion" : "2015-01-01",
       "dependsOn" : [
         "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('masterStorageName'))]"
+        "[concat('Microsoft.Storage/storageAccounts/', variables('nodeStorageName'))]"
       ],
       "properties" : {
         "mode" : "Incremental",
@@ -712,7 +699,7 @@
             "value" : "[concat(resourceGroup().name,'m3')]"
           },
           "sa" : {
-            "value" : "[variables('masterStorageName')]"
+            "value" : "[variables('nodeStorageName')]"
           },
           "subnetRef" : {
             "value" : "[variables('masterSubnetRef')]"
