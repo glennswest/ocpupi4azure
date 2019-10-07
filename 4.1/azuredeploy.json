@@ -508,6 +508,54 @@
       }
     },
     {
+      "name" : "bootstrap",
+      "type" : "Microsoft.Resources/deployments",
+      "apiVersion" : "2015-01-01",
+      "dependsOn" : [
+        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
+        "[concat('Microsoft.Storage/storageAccounts/', variables('masterStorageName'))]"
+      ],
+      "properties" : {
+        "mode" : "Incremental",
+        "templateLink" : {
+          "uri" : "[variables('baseVMachineTemplateUriMaster')]",
+          "contentVersion" : "1.0.0.0"
+        },
+        "parameters" : {
+          "vmName" : {
+            "value" : "bootstrap-0"
+          },
+          "dnsName" : {
+            "value" : "[concat(resourceGroup().name,'m1')]"
+          },
+          "sa" : {
+            "value" : "[variables('masterStorageName')]"
+          },
+          "subnetRef" : {
+            "value" : "[variables('masterSubnetRef')]"
+          },
+          "vmSize" : {
+            "value" : "[parameters('masterVMSize')]"
+          },
+          "ignition" : {
+            "value" : "[parameters('BootstrapIgnition')]"
+          },
+          "baseTemplateUrl" : {
+            "value" : "[variables('baseTemplateUrl')]"
+          },
+          "imageReference" : {
+            "value" : "[variables(parameters('image'))]"
+          },
+          "masterLoadBalancerName" : {
+            "value" : "[variables('masterLoadBalancerName')]"
+          },
+          "availabilitySet" : {
+            "value" : "['masteravailabilityset']"
+          }
+        }
+      }
+    },
+    {
       "name" : "[concat('nodeSet', copyindex())]",
       "type" : "Microsoft.Resources/deployments",
       "apiVersion" : "2015-01-01",
