@@ -17,14 +17,8 @@
     "vmSize" : {
       "type" : "string"
     },
-    "adminUsername" : {
+    "ignition" : {
       "type" : "string"
-    },
-    "sshKeyData" : {
-      "type" : "string",
-      "metadata" : {
-        "description" : "SSH RSA public key file as a string."
-      }
     },
     "baseTemplateUrl" : {
       "type" : "string"
@@ -33,12 +27,6 @@
       "type" : "object",
       "metadata" : {
         "description" : "imageReference object that should be used to create the virtual machine"
-      }
-    },
-    "sshPrivateData" : {
-      "type" : "securestring",
-      "metadata" : {
-        "description" : "SSH RSA private key file as a string."
       }
     },
     "masterLoadBalancerName" : {
@@ -55,8 +43,7 @@
     }
   },
   "variables" : {
-    "apiVersion" : "2015-06-15",
-    "sshKeyPath" : "[concat('/home/',parameters('adminUsername'),'/.ssh/authorized_keys')]"
+    "apiVersion" : "2015-06-15"
   },
   "resources" : [
     {
@@ -109,7 +96,7 @@
         },
         "osProfile" : {
           "computerName" : "[parameters('vmName')]",
-          "adminUsername" : "[parameters('adminUsername')]",
+          "customData" : "[parameters('ignition')]",
           "linuxConfiguration" : {
             "disablePasswordAuthentication" : "true",
             "ssh" : {
