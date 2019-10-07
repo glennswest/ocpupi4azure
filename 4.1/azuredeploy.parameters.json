@@ -2,13 +2,16 @@
   "$schema" : "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion" : "1.0.0.0",
   "parameters" : {
-    "adminUsername" : {
+    "image" : {
+      "value" : "rhcos-410.8.20190504.0-azure.vhd"
+    },
+    "BootstrapIgnition" : {
       "value" : ""
     },
-    "adminPassword" : {
+    "MasterIgnition" : {
       "value" : ""
     },
-    "sshKeyData" : {
+    "WorkerIgnition" : {
       "value" : ""
     },
     "WildcardZone" : {
@@ -16,21 +19,6 @@
     },
     "numberOfNodes" : {
       "value" : 3
-    },
-    "image" : {
-      "value" : "rhel"
-    },
-    "RHNUserName" : {
-      "value" : ""
-    },
-    "RHNPassword" : {
-      "value" : ""
-    },
-    "SubscriptionPoolId" : {
-      "value" : ""
-    },
-    "sshPrivateData" : {
-      "value" : ""
     }
   }
 }
