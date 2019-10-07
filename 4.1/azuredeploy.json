@@ -538,11 +538,8 @@
           "vmSize" : {
             "value" : "[parameters('nodeVMSize')]"
           },
-          "adminUsername" : {
-            "value" : "[parameters('adminUsername')]"
-          },
-          "sshKeyData" : {
-            "value" : "[parameters('sshKeyData')]"
+          "ignition" : {
+            "value" : "[parameters('WorkerIgnition')]"
           },
           "baseTemplateUrl" : {
             "value" : "[variables('baseTemplateUrl')]"
@@ -586,20 +583,14 @@
           "vmSize" : {
             "value" : "[parameters('masterVMSize')]"
           },
-          "adminUsername" : {
-            "value" : "[parameters('adminUsername')]"
-          },
-          "sshKeyData" : {
-            "value" : "[parameters('sshKeyData')]"
+          "ignition" : {
+            "value" : "[parameters('MasterIgnition')]"
           },
           "baseTemplateUrl" : {
             "value" : "[variables('baseTemplateUrl')]"
           },
           "imageReference" : {
             "value" : "[variables(parameters('image'))]"
-          },
-          "sshPrivateData" : {
-            "value" : "[parameters('sshPrivateData')]"
           },
           "masterLoadBalancerName" : {
             "value" : "[variables('masterLoadBalancerName')]"
@@ -640,11 +631,8 @@
           "vmSize" : {
             "value" : "[parameters('masterVMSize')]"
           },
-          "adminUsername" : {
-            "value" : "[parameters('adminUsername')]"
-          },
-          "sshKeyData" : {
-            "value" : "[parameters('sshKeyData')]"
+          "ignition" : {
+            "value" : "[parameters('MasterIgnition')]"
           },
           "baseTemplateUrl" : {
             "value" : "[variables('baseTemplateUrl')]"
@@ -694,11 +682,8 @@
           "vmSize" : {
             "value" : "[parameters('masterVMSize')]"
           },
-          "adminUsername" : {
-            "value" : "[parameters('adminUsername')]"
-          },
-          "sshKeyData" : {
-            "value" : "[parameters('sshKeyData')]"
+          "ignition" : {
+            "value" : "[parameters('MasterIgnition')]"
           },
           "baseTemplateUrl" : {
             "value" : "[variables('baseTemplateUrl')]"
