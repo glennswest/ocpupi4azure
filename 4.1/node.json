@@ -14,14 +14,8 @@
     "vmSize" : {
       "type" : "string"
     },
-    "adminUsername" : {
+    "ignition" : {
       "type" : "string"
-    },
-    "sshKeyData" : {
-      "type" : "securestring",
-      "metadata" : {
-        "description" : "SSH RSA public key file as a string."
-      }
     },
     "baseTemplateUrl" : {
       "type" : "string"
@@ -80,7 +74,7 @@
         },
         "osProfile" : {
           "computerName" : "[parameters('vmName')]",
-          "adminUsername" : "[parameters('adminUsername')]",
+          "customData" : "[parameters('ignition')]",
           "linuxConfiguration" : {
             "disablePasswordAuthentication" : "true",
             "ssh" : {
@@ -136,32 +130,6 @@
         },
         "availabilitySet" : {
           "id" : "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySet'))]"
-        }
-      }
-    },
-    {
-      "type" : "Microsoft.Compute/virtualMachines/extensions",
-      "name" : "[concat(parameters('vmName'),'/installcustomscript')]",
-      "apiVersion" : "[variables('apiVersion')]",
-      "location" : "[resourceGroup().location]",
-      "tags" : {
-        "displayName" : "VirtualMachineCustomScriptExtension"
-      },
-      "dependsOn" : [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
-      ],
-      "properties" : {
-        "publisher" : "Microsoft.Azure.Extensions",
-        "type" : "CustomScript",
-        "typeHandlerVersion" : "2.0",
-        "autoUpgradeMinorVersion" : true,
-        "settings" : {
-          "fileUris" : [
-            "[concat(parameters('baseTemplateUrl'), 'node.sh')]"
-          ]
-        },
-        "protectedSettings" : {
-          "commandToExecute" : "sh node.sh"
         }
       }
     }
