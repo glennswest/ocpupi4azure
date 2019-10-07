@@ -156,32 +156,6 @@
       }
     },
     {
-      "type" : "Microsoft.Compute/virtualMachines/extensions",
-      "name" : "[concat(parameters('vmName'),'/installcustomscript')]",
-      "apiVersion" : "[variables('apiVersion')]",
-      "location" : "[resourceGroup().location]",
-      "tags" : {
-        "displayName" : "VirtualMachineCustomScriptExtension"
-      },
-      "dependsOn" : [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
-      ],
-      "properties" : {
-        "publisher" : "Microsoft.Azure.Extensions",
-        "type" : "CustomScript",
-        "typeHandlerVersion" : "2.0",
-        "autoUpgradeMinorVersion" : true,
-        "settings" : {
-          "fileUris" : [
-            "[concat(parameters('baseTemplateUrl'), 'master.sh')]"
-          ]
-        },
-        "protectedSettings" : {
-          "commandToExecute" : "[ concat('sh master.sh ', parameters('adminUsername'), ' ', parameters('sshPrivateData'),  ' ', parameters('sshKeyData')) ]"
-        }
-      }
-    },
-    {
       "type" : "Microsoft.Network/networkSecurityGroups",
       "name" : "[concat(parameters('vmName'), 'nsg')]",
       "tags" : {
