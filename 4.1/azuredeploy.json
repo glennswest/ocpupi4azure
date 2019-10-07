@@ -194,25 +194,20 @@
     "gituser" : "glennswest",
     "branch" : "master",
     "version" : "4.1",
-    "baseTemplateUrl" : "[concat('https://raw.githubusercontent.com/',variables('gituser'),'/openshift-ansible-contrib/',variables('branch'),'/reference-architecture/azure-ansible/',variables('version'),'/')]",
-    "baseVMachineTemplateUriInfranode" : "[concat(variables('baseTemplateUrl'), 'infranode.json')]",
+    "baseTemplateUrl" : "[concat('https://raw.githubusercontent.com/',variables('gituser'),'/ocpupi4azure/',variables('branch'),'/',variables('version'),'/')]",
     "baseVMachineTemplateUriNode" : "[concat(variables('baseTemplateUrl'), 'node.json')]",
     "baseVMachineTemplateUriMaster" : "[concat(variables('baseTemplateUrl'), 'master.json')]",
     "location" : "[resourceGroup().location]",
     "virtualNetworkName" : "openshiftVnet",
     "addressPrefix" : "10.0.0.0/16",
-    "infranodesubnetName" : "infranodeSubnet",
-    "infranodesubnetPrefix" : "10.0.2.0/24",
     "nodesubnetName" : "nodeSubnet",
     "nodesubnetPrefix" : "10.0.1.0/24",
     "mastersubnetName" : "masterSubnet",
     "mastersubnetPrefix" : "10.0.0.0/24",
-    "infranodeStorageName" : "[concat('sainf', resourceGroup().name)]",
     "nodeStorageName" : "[concat('sanod', resourceGroup().name)]",
     "masterStorageName" : "[concat('samas', resourceGroup().name)]",
     "vhdStorageType" : "Premium_LRS",
     "vnetId" : "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
-    "infranodeSubnetRef" : "[concat(variables('vnetId'), '/subnets/', variables('infranodesubnetName'))]",
     "nodeSubnetRef" : "[concat(variables('vnetId'), '/subnets/', variables('nodesubnetName'))]",
     "masterSubnetRef" : "[concat(variables('vnetId'), '/subnets/', variables('mastersubnetName'))]",
     "rhel" : {
@@ -443,10 +438,7 @@
     "infraLbHttpsProbeId" : "[concat(variables('infraLbId'),'/probes/httpsProbe')]",
     "infraLbCockpitProbeId" : "[concat(variables('infraLbId'),'/probes/cockpitProbe')]",
     "StorageAccountPersistentVolume" : "[concat('sapv', resourceGroup().name)]",
-    "StorageAccountLoggingMetricsVolumes" : "[concat('sapvlm', resourceGroup().name)]",
     "registryStorageName" : "[concat('sareg', resourceGroup().name)]",
-    "subscriptionId" : "[subscription().subscriptionId]",
-    "StorageAccountLoggingMetricsVolumesVolumeType" : "Premium_LRS",
     "apiVersion" : "2015-06-15",
     "apiVersionCompute" : "2015-06-15",
     "apiVersionNetwork" : "2016-03-30",
@@ -455,18 +447,6 @@
     "apiVersionLinkTemplate" : "2015-01-01"
   },
   "resources" : [
-    {
-      "type" : "Microsoft.Storage/storageAccounts",
-      "name" : "[variables('infranodeStorageName')]",
-      "apiVersion" : "[variables('apiVersion')]",
-      "location" : "[variables('location')]",
-      "tags" : {
-        "displayName" : "StorageAccount"
-      },
-      "properties" : {
-        "accountType" : "[variables('vmSizesMap')[parameters('infranodeVMSize')].storageAccountType]"
-      }
-    },
     {
       "type" : "Microsoft.Storage/storageAccounts",
       "name" : "[variables('nodeStorageName')]",
@@ -572,112 +552,6 @@
           },
           "availabilitySet" : {
             "value" : "['nodeavailabilityset']"
-          }
-        }
-      }
-    },
-    {
-      "name" : "bastion",
-      "type" : "Microsoft.Resources/deployments",
-      "apiVersion" : "2015-01-01",
-      "dependsOn" : [
-        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('masterStorageName'))]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('registryStorageName'))]"
-      ],
-      "properties" : {
-        "mode" : "Incremental",
-        "templateLink" : {
-          "uri" : "[variables('baseVMachineTemplateUriBastion')]",
-          "contentVersion" : "1.0.0.0"
-        },
-        "parameters" : {
-          "vmName" : {
-            "value" : "bastion"
-          },
-          "dnsName" : {
-            "value" : "[concat(resourceGroup().name,'b')]"
-          },
-          "sa" : {
-            "value" : "[variables('masterStorageName')]"
-          },
-          "subnetRef" : {
-            "value" : "[variables('masterSubnetRef')]"
-          },
-          "vmSize" : {
-            "value" : "[variables('bastionVMSize')]"
-          },
-          "adminUsername" : {
-            "value" : "[parameters('adminUsername')]"
-          },
-          "adminPassword" : {
-            "value" : "[parameters('adminPassword')]"
-          },
-          "sshKeyData" : {
-            "value" : "[parameters('sshKeyData')]"
-          },
-          "numberOfNodes" : {
-            "value" : "[parameters('numberOfNodes')]"
-          },
-          "baseTemplateUrl" : {
-            "value" : "[variables('baseTemplateUrl')]"
-          },
-          "routerExtIP" : {
-            "value" : "[reference(parameters('WildcardZone')).ipAddress]"
-          },
-          "imageReference" : {
-            "value" : "[variables(parameters('image'))]"
-          },
-          "RHNUserName" : {
-            "value" : "[parameters('RHNUserName')]"
-          },
-          "RHNPassword" : {
-            "value" : "[parameters('RHNPassword')]"
-          },
-          "SubscriptionPoolId" : {
-            "value" : "[parameters('SubscriptionPoolId')]"
-          },
-          "sshPrivateData" : {
-            "value" : "[parameters('sshPrivateData')]"
-          },
-          "wildcardZone" : {
-            "value" : "[parameters('WildcardZone')]"
-          },
-          "registrystoragename" : {
-            "value" : "[variables('registryStorageName')]"
-          },
-          "registrykey" : {
-            "value" : "[listKeys(resourceId('Microsoft.Storage/storageAccounts',variables('registryStorageName')),'2015-06-15').key1]"
-          },
-          "location" : {
-            "value" : "[variables('location')]"
-          },
-          "subscriptionid" : {
-            "value" : "[variables('subscriptionId')]"
-          },
-          "tenantid" : {
-            "value" : "[variables('tenantId')]"
-          },
-          "aadclientid" : {
-            "value" : "[parameters('aadClientId')]"
-          },
-          "aadclientsecret" : {
-            "value" : "[parameters('aadClientSecret')]"
-          },
-          "rhsmmode" : {
-            "value" : "[parameters('rhsmUsernamePasswordOrActivationKey')]"
-          },
-          "openshiftsdn" : {
-            "value" : "[parameters('OpenShiftSDN')]"
-          },
-          "metrics" : {
-            "value" : "[parameters('metrics')]"
-          },
-          "logging" : {
-            "value" : "[parameters('logging')]"
-          },
-          "opslogging" : {
-            "value" : "[parameters('opslogging')]"
           }
         }
       }
@@ -845,204 +719,8 @@
       }
     },
     {
-      "name" : "infranode1",
-      "type" : "Microsoft.Resources/deployments",
-      "apiVersion" : "2015-01-01",
-      "dependsOn" : [
-        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('infranodeStorageName'))]"
-      ],
-      "properties" : {
-        "mode" : "Incremental",
-        "templateLink" : {
-          "uri" : "[variables('baseVMachineTemplateUriInfranode')]",
-          "contentVersion" : "1.0.0.0"
-        },
-        "parameters" : {
-          "vmName" : {
-            "value" : "infranode1"
-          },
-          "sa" : {
-            "value" : "[variables('infranodeStorageName')]"
-          },
-          "subnetRef" : {
-            "value" : "[variables('infranodeSubnetRef')]"
-          },
-          "vmSize" : {
-            "value" : "[parameters('infranodeVMSize')]"
-          },
-          "adminUsername" : {
-            "value" : "[parameters('adminUsername')]"
-          },
-          "sshKeyData" : {
-            "value" : "[parameters('sshKeyData')]"
-          },
-          "baseTemplateUrl" : {
-            "value" : "[variables('baseTemplateUrl')]"
-          },
-          "imageReference" : {
-            "value" : "[variables(parameters('image'))]"
-          },
-          "dnsName" : {
-            "value" : "[concat(resourceGroup().name,'i1')]"
-          },
-          "LoadBalancerName" : {
-            "value" : "[variables('infraLoadBalancerName')]"
-          },
-          "availabilitySet" : {
-            "value" : "['infranodeavailabilityset']"
-          }
-        }
-      }
-    },
-    {
-      "name" : "infranode2",
-      "type" : "Microsoft.Resources/deployments",
-      "apiVersion" : "2015-01-01",
-      "dependsOn" : [
-        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('infranodeStorageName'))]"
-      ],
-      "properties" : {
-        "mode" : "Incremental",
-        "templateLink" : {
-          "uri" : "[variables('baseVMachineTemplateUriInfranode')]",
-          "contentVersion" : "1.0.0.0"
-        },
-        "parameters" : {
-          "vmName" : {
-            "value" : "infranode2"
-          },
-          "sa" : {
-            "value" : "[variables('infranodeStorageName')]"
-          },
-          "subnetRef" : {
-            "value" : "[variables('infranodeSubnetRef')]"
-          },
-          "vmSize" : {
-            "value" : "[parameters('infranodeVMSize')]"
-          },
-          "adminUsername" : {
-            "value" : "[parameters('adminUsername')]"
-          },
-          "sshKeyData" : {
-            "value" : "[parameters('sshKeyData')]"
-          },
-          "baseTemplateUrl" : {
-            "value" : "[variables('baseTemplateUrl')]"
-          },
-          "imageReference" : {
-            "value" : "[variables(parameters('image'))]"
-          },
-          "dnsName" : {
-            "value" : "[concat(resourceGroup().name,'i2')]"
-          },
-          "LoadBalancerName" : {
-            "value" : "[variables('infraLoadBalancerName')]"
-          },
-          "availabilitySet" : {
-            "value" : "['infranodeavailabilityset']"
-          }
-        }
-      }
-    },
-    {
-      "name" : "infranode3",
-      "type" : "Microsoft.Resources/deployments",
-      "apiVersion" : "2015-01-01",
-      "dependsOn" : [
-        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('infranodeStorageName'))]"
-      ],
-      "properties" : {
-        "mode" : "Incremental",
-        "templateLink" : {
-          "uri" : "[variables('baseVMachineTemplateUriInfranode')]",
-          "contentVersion" : "1.0.0.0"
-        },
-        "parameters" : {
-          "vmName" : {
-            "value" : "infranode3"
-          },
-          "sa" : {
-            "value" : "[variables('infranodeStorageName')]"
-          },
-          "subnetRef" : {
-            "value" : "[variables('infranodeSubnetRef')]"
-          },
-          "vmSize" : {
-            "value" : "[parameters('infranodeVMSize')]"
-          },
-          "adminUsername" : {
-            "value" : "[parameters('adminUsername')]"
-          },
-          "sshKeyData" : {
-            "value" : "[parameters('sshKeyData')]"
-          },
-          "baseTemplateUrl" : {
-            "value" : "[variables('baseTemplateUrl')]"
-          },
-          "imageReference" : {
-            "value" : "[variables(parameters('image'))]"
-          },
-          "dnsName" : {
-            "value" : "[concat(resourceGroup().name,'i3')]"
-          },
-          "LoadBalancerName" : {
-            "value" : "[variables('infraLoadBalancerName')]"
-          },
-          "availabilitySet" : {
-            "value" : "['infranodeavailabilityset']"
-          }
-        }
-      }
-    },
-    {
-      "type" : "Microsoft.Storage/storageAccounts",
-      "name" : "[variables('registryStorageName')]",
-      "apiVersion" : "[variables('apiVersion')]",
-      "location" : "[variables('location')]",
-      "tags" : {
-        "displayName" : "StorageAccount"
-      },
-      "properties" : {
-        "accountType" : "['Standard_RAGRS']"
-      }
-    },
-    {
-      "type" : "Microsoft.Storage/storageAccounts",
-      "name" : "[variables('StorageAccountPersistentVolume')]",
-      "apiVersion" : "[variables('apiVersion')]",
-      "location" : "[variables('location')]",
-      "tags" : {
-        "displayName" : "StorageAccountPersistentVolume"
-      },
-      "properties" : {
-        "accountType" : "[variables('vmSizesMap')[parameters('nodeVmSize')].storageAccountType]"
-      }
-    },
-    {
-      "type" : "Microsoft.Storage/storageAccounts",
-      "name" : "[variables('StorageAccountLoggingMetricsVolumes')]",
-      "apiVersion" : "[variables('apiVersion')]",
-      "location" : "[variables('location')]",
-      "tags" : {
-        "displayName" : "StorageAccountLoggingMetricsVolumes"
-      },
-      "properties" : {
-        "accountType" : "[variables('StorageAccountLoggingMetricsVolumesVolumeType')]"
-      }
-    },
-    {
       "type" : "Microsoft.Compute/availabilitySets",
       "name" : "masteravailabilityset",
-      "location" : "[variables('location')]",
-      "apiVersion" : "[variables('apiVersionCompute')]",
-      "properties" : {}
-    },
-    {
-      "type" : "Microsoft.Compute/availabilitySets",
-      "name" : "infranodeavailabilityset",
       "location" : "[variables('location')]",
       "apiVersion" : "[variables('apiVersionCompute')]",
       "properties" : {}
@@ -1235,10 +913,6 @@
     "Openshift Webconsole" : {
       "type" : "string",
       "value" : "[concat('https://', reference(resourceGroup().name).dnsSettings.fqdn, ':8443/console')]"
-    },
-    "Bastion ssh" : {
-      "type" : "string",
-      "value" : "[concat('ssh -A ', reference('bastion').outputs.fqdn.value)]"
     },
     "Openshift Router Public IP" : {
       "type" : "string",
