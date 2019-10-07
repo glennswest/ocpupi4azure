@@ -487,12 +487,6 @@
         },
         "subnets" : [
           {
-            "name" : "[variables('infranodesubnetName')]",
-            "properties" : {
-              "addressPrefix" : "[variables('infranodesubnetPrefix')]"
-            }
-          },
-          {
             "name" : "[variables('nodesubnetName')]",
             "properties" : {
               "addressPrefix" : "[variables('nodesubnetPrefix')]"
