@@ -98,15 +98,7 @@
           "computerName" : "[parameters('vmName')]",
           "customData" : "[parameters('ignition')]",
           "linuxConfiguration" : {
-            "disablePasswordAuthentication" : "true",
-            "ssh" : {
-              "publicKeys" : [
-                {
-                  "path" : "[variables('sshKeyPath')]",
-                  "keyData" : "[parameters('sshKeyData')]"
-                }
-              ]
-            }
+            "disablePasswordAuthentication" : "true"
           }
         },
         "storageProfile" : {
