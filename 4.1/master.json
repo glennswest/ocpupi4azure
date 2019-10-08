@@ -96,6 +96,7 @@
         },
         "osProfile" : {
           "computerName" : "[parameters('vmName')]",
+          "adminUsername" : "\"core\"",
           "customData" : "[parameters('ignition')]",
           "linuxConfiguration" : {
             "disablePasswordAuthentication" : "true"
