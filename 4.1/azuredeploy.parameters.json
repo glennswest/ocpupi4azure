@@ -3,7 +3,7 @@
   "contentVersion" : "1.0.0.0",
   "parameters" : {
     "image" : {
-      "value" : "https://ckocp4storage.blob.core.windows.net/vhd/rhcos-410.8.20190504.0-azure.vhd"
+      "value" : "https://sagswx1.blob.core.windows.net/vhd/rhcos-410.8.20190504.0-azure.vhd"
     },
     "BootstrapIgnition" : {
       "value" : ""
