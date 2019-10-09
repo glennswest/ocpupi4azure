@@ -31,7 +31,8 @@
     }
   },
   "variables" : {
-    "apiVersion" : "2015-06-15"
+    "apiVersion" : "2015-06-15",
+    "sshKeyPath" : "[concat('/home/',parameters('adminUsername'),'/.ssh/authorized_keys')]"
   },
   "resources" : [
     {
@@ -76,7 +77,15 @@
           "adminUsername" : "\"core\"",
           "customData" : "[parameters('ignition')]",
           "linuxConfiguration" : {
-            "disablePasswordAuthentication" : "true"
+            "disablePasswordAuthentication" : "true",
+            "ssh" : {
+              "publicKeys" : [
+                {
+                  "path" : "[variables('sshKeyPath')]",
+                  "keyData" : "[parameters('sshKeyData')]"
+                }
+              ]
+            }
           }
         },
         "storageProfile" : {

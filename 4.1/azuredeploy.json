@@ -43,7 +43,7 @@
         "description" : "Number of OpenShift Nodes to deploy (max 30)"
       }
     },
-     "sshKeyData" : {
+    "sshKeyData" : {
       "type" : "securestring",
       "metadata" : {
         "description" : "SSH RSA public key file as a string."
@@ -445,7 +445,8 @@
     "apiVersionNetwork" : "2016-03-30",
     "tmApiVersion" : "2015-11-01",
     "apiVersionStorage" : "2015-06-15",
-    "apiVersionLinkTemplate" : "2015-01-01"
+    "apiVersionLinkTemplate" : "2015-01-01",
+    "sshKeyPath" : "[concat('/home/','core','/.ssh/authorized_keys')]"
   },
   "resources" : [
     {
@@ -531,6 +532,9 @@
           },
           "availabilitySet" : {
             "value" : "['masteravailabilityset']"
+          },
+          "sshKeyData" : {
+            "value" : "[parameters('sshKeyData')]"
           }
         }
       }
@@ -577,6 +581,9 @@
           },
           "availabilitySet" : {
             "value" : "['nodeavailabilityset']"
+          },
+          "sshKeyData" : {
+            "value" : "[parameters('sshKeyData')]"
           }
         }
       }
@@ -625,6 +632,9 @@
           },
           "availabilitySet" : {
             "value" : "['masteravailabilityset']"
+          },
+          "sshKeyData" : {
+            "value" : "[parameters('sshKeyData')]"
           }
         }
       }
@@ -676,6 +686,9 @@
           },
           "availabilitySet" : {
             "value" : "['masteravailabilityset']"
+          },
+          "sshKeyData" : {
+            "value" : "[parameters('sshKeyData')]"
           }
         }
       }
@@ -727,6 +740,9 @@
           },
           "availabilitySet" : {
             "value" : "['masteravailabilityset']"
+          },
+          "sshKeyData" : {
+            "value" : "[parameters('sshKeyData')]"
           }
         }
       }
