@@ -47,7 +47,7 @@
   },
   "variables" : {
     "apiVersion" : "2015-06-15",
-    "sshKeyPath" : "[concat('/home/','core','/.ssh/authorized_keys')]"
+    "sshKeyPath" : "/home/core/.ssh/authorized_keys"
   },
   "resources" : [
     {
@@ -100,7 +100,7 @@
         },
         "osProfile" : {
           "computerName" : "[parameters('vmName')]",
-          "adminUsername" : "\"core\"",
+          "adminUsername" : "core",
           "customData" : "[parameters('ignition')]",
           "linuxConfiguration" : {
             "disablePasswordAuthentication" : "true",
