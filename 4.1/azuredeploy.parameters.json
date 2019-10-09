@@ -19,6 +19,9 @@
     },
     "numberOfNodes" : {
       "value" : 3
+    },
+    "sshKeyData" : {
+      "value" : ""
     }
   }
 }

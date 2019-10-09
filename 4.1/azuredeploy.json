@@ -43,6 +43,12 @@
         "description" : "Number of OpenShift Nodes to deploy (max 30)"
       }
     },
+     "sshKeyData" : {
+      "type" : "securestring",
+      "metadata" : {
+        "description" : "SSH RSA public key file as a string."
+      }
+    },
     "masterVMSize" : {
       "type" : "string",
       "defaultValue" : "Standard_D4_v2",

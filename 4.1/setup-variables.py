@@ -5,7 +5,7 @@ from dotmap import DotMap
 
 url = sys.argv[1]
 print 'Url: ', url
-ignition = {
+ign = """{
   "ignition": {
     "version": "2.2.0",
     "config": {
@@ -14,9 +14,9 @@ ignition = {
       }
     }
   }
-}
+}"""
 
-
+ignition = DotMap(ign)
 ignition.source = url
 
 with open("gw/bootstrap.ign","r") as ignFile:
