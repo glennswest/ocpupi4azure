@@ -6,25 +6,18 @@ from dotmap import DotMap
 
 url = sys.argv[1]
 print 'Url: ', url
-ign = """{
-  "ignition": {
-    "version": "2.2.0",
-    "config": {
-      "replace": {
-        "source": "http://example.com/config.json",
-      }
-    }
-  }
-}"""
 
-ignition = DotMap(ign)
-ignition.source = url
+ign = DotMap()
+config = DotMap()
+ign.ignition.version = "2.2.0"
+config.replace.source = url
+ign.ignition.config = config
+
+ignstr = json.dumps(dict(**ign.toDict()))
 
 sshpath = os.path.expanduser('~/.ssh/id_rsa.pub')
 with open(sshpath,"r") as sshFile:
      sshkey = sshFile.read()
-with open("gw/bootstrap.ign","r") as ignFile:
-    bootstrap_ignition = json.load(ignFile)
 with open("gw/master.ign","r") as ignFile:
     master_ignition = json.load(ignFile)
 with open("gw/worker.ign","r") as ignFile:
@@ -33,10 +26,10 @@ with open("azuredeploy.parameters.json", "r") as jsonFile:
     data = DotMap(json.load(jsonFile))
 
 
-data.parameters.BootstrapIgnition.value =  base64.b64encode(json.dumps(ignition))
+data.parameters.BootstrapIgnition.value =  base64.b64encode(ignstr)
 data.parameters.MasterIgnition.value =     base64.b64encode(json.dumps(master_ignition)) 
 data.parameters.WorkerIgnition.value =     base64.b64encode(json.dumps(worker_ignition)) 
-data.parameters.sshKeyData           =     sshkey.rstrip()
+data.parameters.sshKeyData.value     =     sshkey.rstrip()
 
 with open("runit.parameters.json", "w") as jsonFile:
     json.dump(data, jsonFile)
