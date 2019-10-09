@@ -1,6 +1,7 @@
 import json
 import base64
 import sys
+import os
 from dotmap import DotMap
 
 url = sys.argv[1]
@@ -19,6 +20,9 @@ ign = """{
 ignition = DotMap(ign)
 ignition.source = url
 
+sshpath = os.path.expanduser('~/.ssh/id_rsa.pub')
+with open(sshpath,"r") as sshFile:
+     sshkey = sshFile.read()
 with open("gw/bootstrap.ign","r") as ignFile:
     bootstrap_ignition = json.load(ignFile)
 with open("gw/master.ign","r") as ignFile:
@@ -32,6 +36,7 @@ with open("azuredeploy.parameters.json", "r") as jsonFile:
 data.parameters.BootstrapIgnition.value =  base64.b64encode(json.dumps(ignition))
 data.parameters.MasterIgnition.value =     base64.b64encode(json.dumps(master_ignition)) 
 data.parameters.WorkerIgnition.value =     base64.b64encode(json.dumps(worker_ignition)) 
+data.parameters.sshKeyData           =     sshkey.rstrip()
 
 with open("runit.parameters.json", "w") as jsonFile:
     json.dump(data, jsonFile)
