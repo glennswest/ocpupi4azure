@@ -540,7 +540,7 @@
       }
     },
     {
-      "name" : "[concat('nodeSet', copyindex())]",
+      "name" : "[concat('node', copyindex())]",
       "type" : "Microsoft.Resources/deployments",
       "apiVersion" : "2015-01-01",
       "copy" : {
@@ -678,9 +678,6 @@
           "imageReference" : {
             "value" : "[parameters('image')]"
           },
-          "sshPrivateData" : {
-            "value" : "[parameters('sshPrivateData')]"
-          },
           "masterLoadBalancerName" : {
             "value" : "[variables('masterLoadBalancerName')]"
           },
@@ -731,9 +728,6 @@
           },
           "imageReference" : {
             "value" : "[parameters('image')]"
-          },
-          "sshPrivateData" : {
-            "value" : "[parameters('sshPrivateData')]"
           },
           "masterLoadBalancerName" : {
             "value" : "[variables('masterLoadBalancerName')]"

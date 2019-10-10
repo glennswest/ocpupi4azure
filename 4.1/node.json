@@ -28,6 +28,12 @@
     },
     "availabilitySet" : {
       "type" : "string"
+    },
+    "sshKeyData" : {
+      "type" : "string",
+      "metadata" : {
+        "description" : "sshKeyData"
+      }
     }
   },
   "variables" : {
