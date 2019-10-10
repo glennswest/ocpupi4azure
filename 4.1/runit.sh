@@ -21,8 +21,17 @@ export VHD_NAME=rhcos-410.8.20190504.0-azure.vhd
 #az storage account create --location "East US" --name sagswx1 --kind StorageV2 --resource-group gswx1 --sku Premium_LRS
 az storage account create --location "East US" --name sagswx1 --kind Storage --resource-group gswx1  --sku Standard_LRS
 az storage container create --name vhd --account-name sagswx1
-ACCOUNT_KEY=$(az storage account keys list --account-name sagswx1 --resource-group gswx1 --query "[0].value" -o tsv)
-az storage blob copy start --account-name "sagswx1" --account-key "$ACCOUNT_KEY" --destination-blob "$VHD_NAME" --destination-container vhd --source-uri "https://openshifttechpreview.blob.core.windows.net/rhcos/$VHD_NAME"
+export ACCOUNT_KEY=$(az storage account keys list --account-name sagswx1 --resource-group gswx1 --query "[0].value" -o tsv)
+az storage blob copy start --account-name "sagswx1" --account-key "$ACCOUNT_KEY" --destination-blob "$VHD_NAME" --destination-container vhd --source-uri "https://openshifttechpreview.blob.core.windows.net/rhcos/$VHD_NAME" 
+echo "Waiting on copy of vhd"
+status="unknown"
+echo $status
+while [ "$status" != "success" ]
+    do
+    status=$(az storage blob show --container-name vhd --name $VHD_NAME --account-name "sagswx1"  --account-key "$ACCOUNT_KEY" -o json --query properties.copy.status | sed -e 's/^"//' -e 's/"$//')
+    done
+echo "Copy of vhd complete"
+
 
 echo "Configure template with ignition files"
 az storage container create --name files --account-name sagswx1 --public-access blob
