@@ -446,7 +446,8 @@
     "tmApiVersion" : "2015-11-01",
     "apiVersionStorage" : "2015-06-15",
     "apiVersionLinkTemplate" : "2015-01-01",
-    "sshKeyPath" : "[concat('/home/','core','/.ssh/authorized_keys')]"
+    "sshKeyPath" : "[concat('/home/','core','/.ssh/authorized_keys')]",
+    "intLoadBalancerName" : "[concat(resourceGroup().name, 'intlb')]"
   },
   "resources" : [
     {
@@ -929,6 +930,38 @@
             }
           }
         ]
+      }
+    },
+    {
+      "type" : "Microsoft.Network/loadBalancers",
+      "name" : "[variables('intLoadBalancerName')]",
+      "location" : "[variables('location')]",
+      "apiVersion" : "[variables('apiVersionNetwork')]",
+      "tags" : {
+        "displayName" : "OpenShiftIntLB"
+      },
+      "dependsOn" : [],
+      "properties" : {
+        "frontendIPConfigurations" : [
+          {
+            "name" : "LoadBalancerFrontEnd",
+            "properties" : {
+              "privateIPAddress" : "10.0.0.200",
+              "privateIPAllocationMethod" : "Static",
+              "subnet" : {
+                "id" : "[variables('masterSubnetRef')]"
+              },
+              "privateIPAddressVersion" : "IPv4"
+            }
+          }
+        ],
+        "backendAddressPools" : [
+          {
+            "name" : "masters"
+          }
+        ],
+        "loadBalancingRules" : [],
+        "probes" : []
       }
     }
   ],
