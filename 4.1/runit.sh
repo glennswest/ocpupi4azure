@@ -32,6 +32,9 @@ while [ "$status" != "success" ]
     done
 echo "Copy of vhd complete"
 
+az network public-ip create -g gswx1 -n gswx1 --allocation-method static
+echo "Public IP Setup"
+read -n 1 -p "Press Enter:" 
 
 echo "Configure template with ignition files"
 az storage container create --name files --account-name sagswx1 --public-access blob
