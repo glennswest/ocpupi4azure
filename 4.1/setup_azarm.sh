@@ -32,9 +32,6 @@ while [ "$status" != "success" ]
     done
 echo "Copy of vhd complete"
 
-az network public-ip create -g gswx1 -n gswx1 --allocation-method static
-echo "Public IP Setup"
-read -n 1 -p "Press Enter:" 
 
 echo "Configure template with ignition files"
 az storage container create --name files --account-name sagswx1 --public-access blob
@@ -42,10 +39,5 @@ ACCOUNT_KEY=$(az storage account keys list --account-name sagswx1 --resource-gro
 az storage blob upload --account-name sagswx1 --account-key $ACCOUNT_KEY -c "files" -f "gw/bootstrap.ign" -n "bootstrap.ign"
 BOOTSTRAPURL=$(az storage blob url --account-name sagswx1 --account-key $ACCOUNT_KEY -c "files" -n "bootstrap.ign" -o tsv)
 python setup-variables.py $BOOTSTRAPURL
-echo "Start Deployment"
-az group deployment create \
-   --name gswx1 \
-   --resource-group gswx1 \
-   --template-uri "https://raw.githubusercontent.com/glennswest/ocpupi4azure/master/4.1/azuredeploy.json" \
-     --parameters "runit.parameters.json"
 
+az network public-ip create -g gswx1 -n gswx1 --allocation-method static
