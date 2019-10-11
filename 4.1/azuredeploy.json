@@ -937,16 +937,18 @@
       "name" : "[variables('intLoadBalancerName')]",
       "location" : "[variables('location')]",
       "apiVersion" : "[variables('apiVersionNetwork')]",
+      "dependsOn" : [
+        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
+      ],
       "tags" : {
         "displayName" : "OpenShiftIntLB"
       },
-      "dependsOn" : [],
       "properties" : {
         "frontendIPConfigurations" : [
           {
             "name" : "LoadBalancerFrontEnd",
             "properties" : {
-              "privateIPAddress" : "10.0.0.200",
+              "privateIPAddress" : "10.0.0.31",
               "privateIPAllocationMethod" : "Static",
               "subnet" : {
                 "id" : "[variables('masterSubnetRef')]"
