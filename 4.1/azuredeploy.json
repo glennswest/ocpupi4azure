@@ -818,7 +818,7 @@
             "name" : "OpenShiftAdminConsole",
             "properties" : {
               "frontendIPConfiguration" : {
-                "id" : "[variables('masterLbFrontEndConfigId')]"
+                "id" : "[variables('masterSubnetRef')]"
               },
               "backendAddressPool" : {
                 "id" : "[variables('masterLbBackendPoolId')]"
