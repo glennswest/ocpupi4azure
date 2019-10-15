@@ -1000,7 +1000,7 @@
               "enableTcpReset" : false,
               "loadDistribution" : "Default",
               "backendAddressPool" : {
-                "id" : "variables('intLbBackendPoolId')]"
+                "id" : "[variables('intLbBackendPoolId')]"
               },
               "probe" : {
                 "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName')), '/probes/probe22623')]"
