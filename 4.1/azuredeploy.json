@@ -447,7 +447,9 @@
     "apiVersionStorage" : "2015-06-15",
     "apiVersionLinkTemplate" : "2015-01-01",
     "sshKeyPath" : "[concat('/home/','core','/.ssh/authorized_keys')]",
-    "intLoadBalancerName" : "[concat(resourceGroup().name, 'intlb')]"
+    "intLoadBalancerName" : "[concat(resourceGroup().name, 'intlb')]",
+    "intLbId" : "[resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName'))]",
+    "intLbBackendPoolId" : "[concat(variables('intLbId'),'/backendAddressPools/loadBalancerBackend')]"
   },
   "resources" : [
     {
@@ -977,7 +979,7 @@
               "enableTcpReset" : false,
               "loadDistribution" : "Default",
               "backendAddressPool" : {
-                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName')), '/backendAddressPools/masters')]"
+                "id" : "[variables('intLbBackendPoolId')]"
               },
               "probe" : {
                 "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName')), '/probes/lbprobe')]"
@@ -998,7 +1000,7 @@
               "enableTcpReset" : false,
               "loadDistribution" : "Default",
               "backendAddressPool" : {
-                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName')), '/backendAddressPools/masters')]"
+                "id" : "variables('intLbBackendPoolId')]"
               },
               "probe" : {
                 "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName')), '/probes/probe22623')]"
