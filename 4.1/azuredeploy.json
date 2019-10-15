@@ -963,7 +963,17 @@
           }
         ],
         "loadBalancingRules" : [],
-        "probes" : []
+        "probes" : [
+          {
+            "properties" : {
+              "protocol" : "Tcp",
+              "port" : 8443,
+              "intervalInSeconds" : 15,
+              "numberOfProbes" : 2
+            },
+            "name" : "lbprobe"
+          }
+        ]
       }
     }
   ],
@@ -978,4 +988,3 @@
     }
   }
 }
-
