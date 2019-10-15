@@ -962,7 +962,50 @@
             "name" : "masters"
           }
         ],
-        "loadBalancingRules" : [],
+        "loadBalancingRules" : [
+          {
+            "name" : "lbrint",
+            "properties" : {
+              "frontendIPConfiguration" : {
+                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_gswx1intlb_name')), '/frontendIPConfigurations/LoadBalancerFrontEnd')]"
+              },
+              "frontendPort" : 8443,
+              "backendPort" : 8443,
+              "enableFloatingIP" : false,
+              "idleTimeoutInMinutes" : 4,
+              "protocol" : "Tcp",
+              "enableTcpReset" : false,
+              "loadDistribution" : "Default",
+              "backendAddressPool" : {
+                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName')), '/backendAddressPools/masters')]"
+              },
+              "probe" : {
+                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName')), '/probes/lbprobe')]"
+              }
+            }
+          },
+          {
+            "name" : "lb22623",
+            "properties" : {
+              "frontendIPConfiguration" : {
+                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_gswx1intlb_name')), '/frontendIPConfigurations/LoadBalancerFrontEnd')]"
+              },
+              "frontendPort" : 22623,
+              "backendPort" : 22623,
+              "enableFloatingIP" : false,
+              "idleTimeoutInMinutes" : 4,
+              "protocol" : "Tcp",
+              "enableTcpReset" : false,
+              "loadDistribution" : "Default",
+              "backendAddressPool" : {
+                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName')), '/backendAddressPools/masters')]"
+              },
+              "probe" : {
+                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName')), '/probes/probe22623')]"
+              }
+            }
+          }
+        ],
         "probes" : [
           {
             "properties" : {
@@ -972,6 +1015,15 @@
               "numberOfProbes" : 2
             },
             "name" : "lbprobe"
+          },
+          {
+            "name" : "probe22623",
+            "properties" : {
+              "protocol" : "Tcp",
+              "port" : 22623,
+              "intervalInSeconds" : 5,
+              "numberOfProbes" : 2
+            }
           }
         ]
       }
