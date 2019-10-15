@@ -988,7 +988,7 @@
             "name" : "lb22623",
             "properties" : {
               "frontendIPConfiguration" : {
-                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_gswx1intlb_name')), '/frontendIPConfigurations/LoadBalancerFrontEnd')]"
+                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName')), '/frontendIPConfigurations/LoadBalancerFrontEnd')]"
               },
               "frontendPort" : 22623,
               "backendPort" : 22623,
