@@ -818,7 +818,7 @@
             "name" : "OpenShiftAdminConsole",
             "properties" : {
               "frontendIPConfiguration" : {
-                "id" : "[variables('masterSubnetRef')]"
+                "id" : "[variables('masterLbFrontEndConfigId')]"
               },
               "backendAddressPool" : {
                 "id" : "[variables('masterLbBackendPoolId')]"
@@ -952,50 +952,18 @@
               "privateIPAllocationMethod" : "Static",
               "subnet" : {
                 "id" : "[variables('masterSubnetRef')]"
-              }
+              },
+              "privateIPAddressVersion" : "IPv4"
             }
           }
         ],
         "backendAddressPools" : [
-          "IPv4",
           {
-            "id" : "[variables('masterLbBackendPoolId')]"
+            "name" : "masters"
           }
         ],
-        "loadBalancingRules" : [
-          {
-            "name" : "LoadBalance22623",
-            "properties" : {
-              "frontendIPConfiguration" : {
-                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_gswx1intlb_name')), '/frontendIPConfigurations/LoadBalancerFrontEnd')]"
-              },
-              "frontendPort" : 22623,
-              "backendPort" : 22623,
-              "enableFloatingIP" : false,
-              "idleTimeoutInMinutes" : 4,
-              "protocol" : "Tcp",
-              "enableTcpReset" : false,
-              "loadDistribution" : "Default",
-              "backendAddressPool" : {
-                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_gswx1intlb_name')), '/backendAddressPools/masters')]"
-              },
-              "probe" : {
-                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_gswx1intlb_name')), '/probes/ProbeConfig')]"
-              }
-            }
-          }
-        ],
-        "probes" : [
-          {
-            "name" : "ProbeConfig",
-            "properties" : {
-              "protocol" : "Tcp",
-              "port" : 22623,
-              "intervalInSeconds" : 5,
-              "numberOfProbes" : 2
-            }
-          }
-        ]
+        "loadBalancingRules" : [],
+        "probes" : []
       }
     }
   ],
@@ -1010,3 +978,4 @@
     }
   }
 }
+
