@@ -450,8 +450,9 @@
     "intLoadBalancerName" : "[concat(resourceGroup().name, 'intlb')]",
     "intLbId" : "[resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName'))]",
     "intLbBackendPoolId" : "[concat(variables('intLbId'),'/backendAddressPools/loadBalancerBackend')]",
-    "intLbProbeId" : "[concat(variables('infraLbId'),'/probes/lbprobe')]",
-    "intLbProbeId2" : "[concat(variables('infraLbId'),'/probes/probe22623')]"
+    "intLbProbeId" : "[concat(variables('intLbId'),'/probes/lbprobe')]",
+    "intLbProbeId2" : "[concat(variables('intLbId'),'/probes/probe22623')]",
+    "intLbFrontEndConfigId" : "[concat(variables('intLbId'), '/frontendIPConfigurations/loadBalancerFrontEnd')]"
   },
   "resources" : [
     {
@@ -971,7 +972,7 @@
             "name" : "lbrint",
             "properties" : {
               "frontendIPConfiguration" : {
-                "id" : "[concat(resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName')), '/frontendIPConfigurations/LoadBalancerFrontEnd')]"
+                "id" : "[variables('intLbFrontEndConfigId')]"
               },
               "frontendPort" : 8443,
               "backendPort" : 8443,
