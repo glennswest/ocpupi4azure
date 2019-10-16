@@ -449,7 +449,7 @@
     "sshKeyPath" : "[concat('/home/','core','/.ssh/authorized_keys')]",
     "intLoadBalancerName" : "[concat(resourceGroup().name, 'intlb')]",
     "intLbId" : "[resourceId('Microsoft.Network/loadBalancers', variables('intLoadBalancerName'))]",
-    "intLbBackendPoolId" : "[concat(variables('intLbId'),'/backendAddressPools/loadBalancerBackend')]",
+    "intLbBackendPoolId" : "[concat(variables('intLbId'),'/backendAddressPools/masters')]",
     "intLbProbeId" : "[concat(variables('intLbId'),'/probes/lbprobe')]",
     "intLbProbeId2" : "[concat(variables('intLbId'),'/probes/probe22623')]",
     "intLbFrontEndConfigId" : "[concat(variables('intLbId'), '/frontendIPConfigurations/loadBalancerFrontEnd')]"
