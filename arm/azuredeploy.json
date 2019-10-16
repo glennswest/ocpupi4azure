@@ -541,10 +541,10 @@
           },
           "sshKeyData" : {
             "value" : "[parameters('sshKeyData')]"
+          },
+          "ipAddress" : {
+            "value" : "10.0.0.4"
           }
-        },
-        "ipAddress" : {
-          "value" : "10.0.0.4"
         }
       }
     },
