@@ -542,6 +542,9 @@
           "sshKeyData" : {
             "value" : "[parameters('sshKeyData')]"
           }
+        },
+        "ipAddress" : {
+          "value" : "10.0.0.4"
         }
       }
     },
@@ -641,6 +644,9 @@
           },
           "sshKeyData" : {
             "value" : "[parameters('sshKeyData')]"
+          },
+          "ipAddress" : {
+            "value" : "10.0.0.5"
           }
         }
       }
@@ -692,6 +698,9 @@
           },
           "sshKeyData" : {
             "value" : "[parameters('sshKeyData')]"
+          },
+          "ipAddress" : {
+            "value" : "10.0.0.6"
           }
         }
       }
@@ -743,6 +752,9 @@
           },
           "sshKeyData" : {
             "value" : "[parameters('sshKeyData')]"
+          },
+          "ipAddress" : {
+            "value" : "10.0.0.7"
           }
         }
       }
@@ -953,7 +965,7 @@
           {
             "name" : "LoadBalancerFrontEnd",
             "properties" : {
-              "privateIPAddress" : "10.0.0.31",
+              "privateIPAddress" : "10.0.0.63",
               "privateIPAllocationMethod" : "Static",
               "subnet" : {
                 "id" : "[variables('masterSubnetRef')]"
