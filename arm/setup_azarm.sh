@@ -2,7 +2,7 @@ echo "Using resource group $1
 rm -r -f gw
 mkdir gw
 cp install-config.yaml gw
-openshift-install create ignition-configs --dir=gw
+./openshift-install create ignition-configs --dir=gw
 #cp gw/auth/kubeconfig ~/.kube/config
 #rm ~/.kube/config
 #cp gw/auth/kubeconfig ~/.kube/config
