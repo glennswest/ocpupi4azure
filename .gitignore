@@ -1,5 +1,5 @@
-4.1/gw
-4.1/gw/*
-4.1/runit.parameters.json
-4.1/install-config.yaml
+arm/gw
+arm/gw/*
+arm/runit.parameters.json
+arm/install-config.yaml
 

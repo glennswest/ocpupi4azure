@@ -195,7 +195,7 @@
   "variables" : {
     "gituser" : "glennswest",
     "branch" : "master",
-    "version" : "4.1",
+    "version" : "arm",
     "baseTemplateUrl" : "[concat('https://raw.githubusercontent.com/',variables('gituser'),'/ocpupi4azure/',variables('branch'),'/',variables('version'),'/')]",
     "baseVMachineTemplateUriNode" : "[concat(variables('baseTemplateUrl'), 'node.json')]",
     "baseVMachineTemplateUriMaster" : "[concat(variables('baseTemplateUrl'), 'master.json')]",
