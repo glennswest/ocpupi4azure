@@ -1,4 +1,6 @@
 registry.json
+wip/*
+openshift-install
 arm/gw
 arm/gw/*
 arm/runit.parameters.json
