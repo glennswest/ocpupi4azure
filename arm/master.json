@@ -179,7 +179,7 @@
             "properties" : {
               "protocol" : "Tcp",
               "sourcePortRange" : "*",
-              "destinationPortRange" : "8443",
+              "destinationPortRange" : "6443",
               "sourceAddressPrefix" : "*",
               "destinationAddressPrefix" : "*",
               "access" : "Allow",
