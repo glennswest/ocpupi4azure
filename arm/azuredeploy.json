@@ -51,7 +51,7 @@
     },
     "masterVMSize" : {
       "type" : "string",
-      "defaultValue" : "Standard_D4_v2",
+      "defaultValue" : "Standard_D8_v3",
       "allowedValues" : [
         "Standard_A2",
         "Standard_A3",
@@ -74,6 +74,7 @@
         "Standard_D3_v2",
         "Standard_D4_v2",
         "Standard_D5_v2",
+        "Standard_D8_v3",
         "Standard_D11_v2",
         "Standard_D12_v2",
         "Standard_D13_v2",
@@ -122,7 +123,7 @@
     },
     "nodeVMSize" : {
       "type" : "string",
-      "defaultValue" : "Standard_D4_v2",
+      "defaultValue" : "Standard_D8_v3",
       "allowedValues" : [
         "Standard_A2",
         "Standard_A3",
@@ -145,6 +146,7 @@
         "Standard_D3_v2",
         "Standard_D4_v2",
         "Standard_D5_v2",
+        "Standard_D8_v3",
         "Standard_D11_v2",
         "Standard_D12_v2",
         "Standard_D13_v2",
@@ -286,6 +288,9 @@
         "storageAccountType" : "Standard_LRS"
       },
       "Standard_D5_v2" : {
+        "storageAccountType" : "Standard_LRS"
+      },
+      "Standard_D8_v3" : {
         "storageAccountType" : "Standard_LRS"
       },
       "Standard_D11_v2" : {
