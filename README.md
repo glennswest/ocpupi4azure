@@ -15,9 +15,9 @@ This creates:
 ### To Use:
 
 ### Prerequisites:
-1. Download the installer
-2. Make sure python2 is installed
-3. Execute: pip install dotmap
+1. Download the installer 
+2. Make sure python2 is installed 
+3. Execute: pip install dotmap 
 
 
 ./setup_azarm.sh UniqueResourceGroupName  
