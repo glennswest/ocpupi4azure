@@ -3,20 +3,11 @@ rm -r -f gw
 mkdir gw
 cp install-config.yaml gw
 ./openshift-install create ignition-configs --dir=gw
-#cp gw/auth/kubeconfig ~/.kube/config
-#rm ~/.kube/config
-#cp gw/auth/kubeconfig ~/.kube/config
-#scp gw/* root@store.gw.lo:/volume1/tftp
-#sleep 5
-#openshift-install --dir=gw wait-for bootstrap-complete --log-level debug
-#openshift-install --dir=gw wait-for install-complete --log-level debug
-
-
-#~/azlogin.sh
+cp gw/auth/kubeconfig ~/.kube/config
 echo "Delete old resource group"
 az group delete --name $1 --yes
 echo "Create new resource group"
-az group create --name $1 --location "East US"
+az group create --name $1 --location "Central US"
 echo "Copy RHCOS to resource group"
 #export VHD_NAME=rhcos-410.8.20190504.0-azure.vhd
 export VHD_URL=https://rhcos.blob.core.windows.net/imagebucket/
