@@ -1,3 +1,6 @@
+doc/~*
+~*
+arm/~*
 registry.json
 wip/*
 openshift-install
