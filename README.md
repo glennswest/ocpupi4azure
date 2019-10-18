@@ -14,9 +14,9 @@ This creates:
 
 ### To Use:
 
-./setup_azarm.sh UniqueResourceGroupName 
+./setup_azarm.sh UniqueResourceGroupName  
 read -p "Press [Enter] to start deploy"  
-./deploy_azarm.sh UniqueResourceGroupNaem 
+./deploy_azarm.sh UniqueResourceGroupNaem  
 
 For more information see: 
     [azocpupi_overview.pdf](https://github.com/glennswest/ocpupi4azure/blob/master/doc/azocpupi_overview.pdf)
