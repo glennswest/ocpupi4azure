@@ -1,5 +1,5 @@
 echo "Using resource group $1"
-export AZREGION="Central US"
+export AZREGION="centralus"
 rm -r -f gw
 mkdir gw
 cp install-config.yaml gw
