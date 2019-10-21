@@ -767,7 +767,7 @@
     },
     {
       "type" : "Microsoft.Network/publicIPAddresses",
-      "name" : "[variable('infraPublicIpName')]",
+      "name" : "[variables('infraPublicIpName')]",
       "location" : "[variables('location')]",
       "apiVersion" : "[variables('apiVersionNetwork')]",
       "tags" : {
