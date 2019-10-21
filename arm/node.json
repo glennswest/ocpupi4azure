@@ -34,6 +34,12 @@
       "metadata" : {
         "description" : "sshKeyData"
       }
+    },
+    "infraLoadBalancerName" : {
+      "type" : "string",
+      "metadata" : {
+        "description" : "loadbalacername"
+      }
     }
   },
   "variables" : {
@@ -57,7 +63,12 @@
               "privateIPAllocationMethod" : "Dynamic",
               "subnet" : {
                 "id" : "[parameters('subnetRef')]"
-              }
+              },
+              "loadBalancerBackendAddressPools" : [
+                {
+                  "id" : "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/loadBalancers/', parameters('infraLoadBalancerName'), '/backendAddressPools/loadBalancerBackEnd')]"
+                }
+              ]
             }
           }
         ]
