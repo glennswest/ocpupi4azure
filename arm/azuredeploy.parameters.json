@@ -14,9 +14,6 @@
     "WorkerIgnition" : {
       "value" : ""
     },
-    "WildcardZone" : {
-      "value" : "wildcardzone"
-    },
     "numberOfNodes" : {
       "value" : 3
     },

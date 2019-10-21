@@ -27,13 +27,6 @@
         "description" : "User password for the OpenShift Webconsole"
       }
     },
-    "WildcardZone" : {
-      "type" : "string",
-      "minLength" : 1,
-      "metadata" : {
-        "description" : "Globally unique wildcard DNS domain for app access."
-      }
-    },
     "numberOfNodes" : {
       "type" : "int",
       "defaultValue" : 3,
@@ -435,8 +428,9 @@
     "masterLbBackendPoolId" : "[concat(variables('masterLbId'),'/backendAddressPools/loadBalancerBackend')]",
     "masterLbHttpProbeId" : "[concat(variables('masterLbId'),'/probes/httpProbe')]",
     "masterLb6443ProbeId" : "[concat(variables('masterLbId'),'/probes/6443Probe')]",
-    "infraLoadBalancerName" : "[concat(parameters('WildcardZone'), 'lb')]",
-    "infraPublicIpAddressId" : "[resourceId('Microsoft.Network/publicIPAddresses', parameters('WildcardZone'))]",
+    "infraPublicIpName" : "[concat(resourceGroup().name),'app')]",
+    "infraLoadBalancerName" : "[concat('AppLb',resourceGroup().name)]",
+    "infraPublicIpAddressId" : "[resourceId('Microsoft.Network/publicIPAddresses', resourceGroup().name),'app']",
     "infraLbId" : "[resourceId('Microsoft.Network/loadBalancers', variables('infraLoadBalancerName'))]",
     "infraLbFrontEndConfigId" : "[concat(variables('infraLbId'), '/frontendIPConfigurations/loadBalancerFrontEnd')]",
     "infraLbBackendPoolId" : "[concat(variables('infraLbId'),'/backendAddressPools/loadBalancerBackend')]",
@@ -773,7 +767,7 @@
     },
     {
       "type" : "Microsoft.Network/publicIPAddresses",
-      "name" : "[parameters('WildcardZone')]",
+      "name" : "[variable('infraPublicIpName')]",
       "location" : "[variables('location')]",
       "apiVersion" : "[variables('apiVersionNetwork')]",
       "tags" : {
@@ -782,7 +776,7 @@
       "properties" : {
         "publicIPAllocationMethod" : "Static",
         "dnsSettings" : {
-          "domainNameLabel" : "[parameters('WildcardZone')]"
+          "domainNameLabel" : "[variables('infraPublicIpName')]"
         }
       }
     },
@@ -878,7 +872,7 @@
         "displayName" : "OpenShiftMasterLB"
       },
       "dependsOn" : [
-        "[concat('Microsoft.Network/publicIPAddresses/', parameters('WildcardZone'))]"
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('infraPublicIpName'))]"
       ],
       "properties" : {
         "frontendIPConfigurations" : [
@@ -1055,10 +1049,6 @@
     "Openshift Webconsole" : {
       "type" : "string",
       "value" : "[concat('https://', reference(resourceGroup().name).dnsSettings.fqdn, ':8443/console')]"
-    },
-    "Openshift Router Public IP" : {
-      "type" : "string",
-      "value" : "[reference(parameters('WildcardZone')).ipAddress]"
     }
   }
 }
