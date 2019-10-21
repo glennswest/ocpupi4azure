@@ -588,7 +588,7 @@
             "value" : "[parameters('image')]"
           },
           "infraLoadBalancerName" : {
-            "value" : "[variables('masterLoadBalancerName')]"
+            "value" : "[variables('infraLoadBalancerName')]"
           },
           "availabilitySet" : {
             "value" : "['nodeavailabilityset']"
