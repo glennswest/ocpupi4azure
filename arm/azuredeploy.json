@@ -430,7 +430,7 @@
     "masterLb6443ProbeId" : "[concat(variables('masterLbId'),'/probes/6443Probe')]",
     "infraPublicIpName" : "[concat(resourceGroup().name,'app')]",
     "infraLoadBalancerName" : "[concat('AppLb',resourceGroup().name)]",
-    "infraPublicIpAddressId" : "[resourceId('Microsoft.Network/publicIPAddresses', resourceGroup().name),'app']",
+    "infraPublicIpAddressId" : "[resourceId('Microsoft.Network/publicIPAddresses', variables('infraPublicIpName'))]",
     "infraLbId" : "[resourceId('Microsoft.Network/loadBalancers', variables('infraLoadBalancerName'))]",
     "infraLbFrontEndConfigId" : "[concat(variables('infraLbId'), '/frontendIPConfigurations/loadBalancerFrontEnd')]",
     "infraLbBackendPoolId" : "[concat(variables('infraLbId'),'/backendAddressPools/loadBalancerBackend')]",
