@@ -428,7 +428,7 @@
     "masterLbBackendPoolId" : "[concat(variables('masterLbId'),'/backendAddressPools/loadBalancerBackend')]",
     "masterLbHttpProbeId" : "[concat(variables('masterLbId'),'/probes/httpProbe')]",
     "masterLb6443ProbeId" : "[concat(variables('masterLbId'),'/probes/6443Probe')]",
-    "infraPublicIpName" : "[concat(resourceGroup().name),'app')]",
+    "infraPublicIpName" : "[concat(resourceGroup().name,'app')]",
     "infraLoadBalancerName" : "[concat('AppLb',resourceGroup().name)]",
     "infraPublicIpAddressId" : "[resourceId('Microsoft.Network/publicIPAddresses', resourceGroup().name),'app']",
     "infraLbId" : "[resourceId('Microsoft.Network/loadBalancers', variables('infraLoadBalancerName'))]",
