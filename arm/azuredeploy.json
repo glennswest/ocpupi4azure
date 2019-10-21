@@ -872,7 +872,7 @@
       "location" : "[variables('location')]",
       "apiVersion" : "[variables('apiVersionNetwork')]",
       "tags" : {
-        "displayName" : "OpenShiftMasterLB"
+        "displayName" : "appLB"
       },
       "dependsOn" : [
         "[concat('Microsoft.Network/publicIPAddresses/', variables('infraPublicIpName'))]"
