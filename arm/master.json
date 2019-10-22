@@ -58,6 +58,9 @@
       "type" : "Microsoft.Network/networkInterfaces",
       "name" : "[concat(parameters('vmName'), 'nic')]",
       "location" : "[resourceGroup().location]",
+       "identity": {
+             "type": "SystemAssigned",
+             },
       "dependsOn" : [
         "[concat('Microsoft.Network/networkSecurityGroups/', concat(parameters('vmName'), 'nsg'))]"
       ],
