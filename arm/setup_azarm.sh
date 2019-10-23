@@ -10,10 +10,8 @@ az group delete --name $1 --yes
 echo "Create new resource group"
 az group create --name $1 --location $AZREGION
 echo "Copy RHCOS to resource group"
-#export VHD_NAME=rhcos-410.8.20190504.0-azure.vhd
 export VHD_URL=https://rhcos.blob.core.windows.net/imagebucket/
-export VHD_NAME=rhcos-42.80.20191010.0.vhd
-#az storage account create --location $AZREGION --name sa${1} --kind StorageV2 --resource-group $1 --sku Premium_LRS
+export VHD_NAME=rhcos-42.80.20191002.0.vhd
 az storage account create --location $AZREGION --name sa${1} --kind Storage --resource-group $1  --sku Standard_LRS
 az storage container create --name vhd --account-name sa${1}
 export ACCOUNT_KEY=$(az storage account keys list --account-name sa${1} --resource-group $1 --query "[0].value" -o tsv)
