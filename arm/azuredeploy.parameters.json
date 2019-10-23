@@ -3,7 +3,7 @@
   "contentVersion" : "1.0.0.0",
   "parameters" : {
     "image" : {
-      "value" : "https://sagswx1.blob.core.windows.net/imagebucket/rhcos.vhd"
+      "value" : "https://sagswx1.blob.core.windows.net/vhd/rhcos.vhd"
     },
     "BootstrapIgnition" : {
       "value" : ""
