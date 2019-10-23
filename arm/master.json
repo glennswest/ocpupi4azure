@@ -58,9 +58,6 @@
       "type" : "Microsoft.Network/networkInterfaces",
       "name" : "[concat(parameters('vmName'), 'nic')]",
       "location" : "[resourceGroup().location]",
-       "identity": {
-             "type": "SystemAssigned",
-             },
       "dependsOn" : [
         "[concat('Microsoft.Network/networkSecurityGroups/', concat(parameters('vmName'), 'nsg'))]"
       ],
@@ -95,6 +92,9 @@
       "type" : "Microsoft.Compute/virtualMachines",
       "name" : "[parameters('vmName')]",
       "location" : "[resourceGroup().location]",
+      "identity": {
+             "type": "SystemAssigned",
+             },
       "dependsOn" : [
         "[concat('Microsoft.Network/networkInterfaces/', concat(parameters('vmName'), 'nic'))]"
       ],
