@@ -15,13 +15,13 @@ export VHD_NAME=rhcos-42.80.20191002.0.vhd
 az storage account create --location $AZREGION --name sa${1} --kind Storage --resource-group $1  --sku Standard_LRS
 az storage container create --name vhd --account-name sa${1}
 export ACCOUNT_KEY=$(az storage account keys list --account-name sa${1} --resource-group $1 --query "[0].value" -o tsv)
-az storage blob copy start --account-name "sa${1}" --account-key "$ACCOUNT_KEY" --destination-blob "$VHD_NAME" --destination-container vhd --source-uri ${VHD_URL}${VHD_NAME}
+az storage blob copy start --account-name "sa${1}" --account-key "$ACCOUNT_KEY" --destination-blob "rhcos.vhd" --destination-container vhd --source-uri ${VHD_URL}${VHD_NAME}
 echo "Waiting on copy of vhd"
 status="unknown"
 echo $status
 while [ "$status" != "success" ]
     do
-    status=$(az storage blob show --container-name vhd --name $VHD_NAME --account-name "sa${1}"  --account-key "$ACCOUNT_KEY" -o json --query properties.copy.status | sed -e 's/^"//' -e 's/"$//')
+    status=$(az storage blob show --container-name vhd --name "rhcos.vhd" --account-name "sa${1}"  --account-key "$ACCOUNT_KEY" -o json --query properties.copy.status | sed -e 's/^"//' -e 's/"$//')
     done
 echo "Copy of vhd complete"
 
