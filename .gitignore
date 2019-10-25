@@ -1,3 +1,4 @@
+arm/auth/*
 arm/.openshift_install.log
 arm/.openshift_install_state.json
 arm/.*
