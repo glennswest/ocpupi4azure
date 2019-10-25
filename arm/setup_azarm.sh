@@ -3,8 +3,8 @@ export AZREGION="centralus"
 rm -r -f gw
 mkdir gw
 cp install-config.yaml gw
-openshift-install create manifests --dir=gw
-cp ~/cloud-provider-config.yaml gw/manifests/cloud-provider-config.yaml
+#openshift-install create manifests --dir=gw
+#cp ~/cloud-provider-config.yaml gw/manifests/cloud-provider-config.yaml
 ./openshift-install create ignition-configs --dir=gw
 cp gw/auth/kubeconfig ~/.kube/config
 echo "Delete old resource group"
