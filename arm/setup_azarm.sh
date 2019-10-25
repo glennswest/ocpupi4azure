@@ -3,12 +3,15 @@ export AZREGION="centralus"
 rm -r -f gw
 mkdir gw
 cp install-config.yaml gw
+openshift-install create manifests --dir=gw
+cp ~/cloud-provider-config.yaml gw/manifests/cloud-provider-config.yaml
 ./openshift-install create ignition-configs --dir=gw
 cp gw/auth/kubeconfig ~/.kube/config
 echo "Delete old resource group"
 az group delete --name $1 --yes
 echo "Create new resource group"
 az group create --name $1 --location $AZREGION
+az identity create -g $1 -n ${1}_userid
 echo "Copy RHCOS to resource group"
 export VHD_URL=https://rhcos.blob.core.windows.net/imagebucket/
 export VHD_NAME=rhcos-42.80.20191002.0.vhd

@@ -49,8 +49,9 @@
     }
   },
   "variables" : {
-    "apiVersion" : "2015-06-15",
-    "sshKeyPath" : "/home/core/.ssh/authorized_keys"
+    "apiVersion" : "2018-06-01",
+    "sshKeyPath" : "/home/core/.ssh/authorized_keys",
+    "useridname" : "[concat(resourceGroup().name,'_userid')]"
   },
   "resources" : [
     {
@@ -92,9 +93,12 @@
       "type" : "Microsoft.Compute/virtualMachines",
       "name" : "[parameters('vmName')]",
       "location" : "[resourceGroup().location]",
-      "identity": {
-             "type": "SystemAssigned",
-             },
+      "identity" : {
+        "type" : "userAssigned",
+        "userAssignedIdentities" : {
+          "[resourceID('Microsoft.ManagedIdentity/userAssignedIdentities/',variables('useridname'))]" : {}
+        }
+      },
       "dependsOn" : [
         "[concat('Microsoft.Network/networkInterfaces/', concat(parameters('vmName'), 'nic'))]"
       ],
