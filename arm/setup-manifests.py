@@ -6,9 +6,6 @@ from dotmap import DotMap
 import yaml
 
 resource_group = sys.argv[1]
-print ('resource_group: ', resource_group)
-
-
 
 with open('./gw/manifests/cloud-provider-config.yaml') as file:
       yamlx = yaml.load(file)
