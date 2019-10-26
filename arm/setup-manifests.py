@@ -31,7 +31,7 @@ with open('./gw/manifests/cluster-infrastructure-02-config.yml') as file:
           yaml.dump(yamlx, outfile, default_flow_style=False)
 
 dnsyml = "gw/manifests/cluster-dns-02-config.yml"
-if (os.path.isfile(dnsyml)
+if (os.path.isfile(dnsyml):
    os.remove(dnsyml)
 
 """
