@@ -5,7 +5,6 @@ import os
 from dotmap import DotMap
 
 url = sys.argv[1]
-print 'Url: ', url
 
 ign = DotMap()
 config = DotMap()
