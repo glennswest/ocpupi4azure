@@ -4,9 +4,10 @@ rm -r -f gw
 mkdir gw
 cp install-config.yaml gw
 ./openshift-install create manifests --dir=gw
-mkdir -p gw/archive/manifests
-cp gw/manifests/* gw/archive/manifests
+mkdir -p gw/archive/manifests/original
+cp gw/manifests/* gw/archive/manifests/original
 python3 setup-manifests.py $1
+cp gw/manifests/* gw/archive/manifests/
 read -p "Press [Enter] to start after manifests"
 ./openshift-install create ignition-configs --dir=gw
 cp gw/auth/kubeconfig ~/.kube/config
