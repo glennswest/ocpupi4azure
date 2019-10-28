@@ -30,9 +30,8 @@ with open('./gw/manifests/cluster-infrastructure-02-config.yml') as file:
       with open('./gw/manifests/cluster-infrastructure-02-config.yml','w') as outfile:
           yaml.dump(yamlx, outfile, default_flow_style=False)
 
-"""
 dnsyml = "gw/manifests/cluster-dns-02-config.yml"
-if (os.path.isfile(dnsyml)):
-   os.remove(dnsyml)
-"""
-
+data = yaml.load(open(dnsyml));
+del data["spec"]["publicZone"];
+del data["spec"]["privateZone"];
+open(path, "w").write(yaml.dump(data, default_flow_style=False))'
