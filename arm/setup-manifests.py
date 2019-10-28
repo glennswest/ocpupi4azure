@@ -34,4 +34,4 @@ dnsyml = "gw/manifests/cluster-dns-02-config.yml"
 data = yaml.load(open(dnsyml));
 del data["spec"]["publicZone"];
 del data["spec"]["privateZone"];
-open(path, "w").write(yaml.dump(data, default_flow_style=False))
+open(dnsyml, "w").write(yaml.dump(data, default_flow_style=False))
