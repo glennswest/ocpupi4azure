@@ -34,5 +34,5 @@ data.parameters.image.value          =     'https://sa' + region + '.blob.core.w
 
 jsondata = dict(**data.toDict())
 with open("runit.parameters.json", "w") as jsonFile:
-    json.dump(jsondata, jsonFile)
+    json.dump(jsondata,jsonFile)
 
