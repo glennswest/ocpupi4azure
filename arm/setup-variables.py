@@ -26,8 +26,8 @@ with open("azuredeploy.parameters.json", "r") as jsonFile:
 
 
 data.parameters.BootstrapIgnition.value =  base64.b64encode(ignstr.encode())
-data.parameters.MasterIgnition.value =     base64.b64encode(json.dumps(master_ignition)) 
-data.parameters.WorkerIgnition.value =     base64.b64encode(json.dumps(worker_ignition)) 
+data.parameters.MasterIgnition.value =     base64.b64encode(json.dumps(master_ignition).encode()) 
+data.parameters.WorkerIgnition.value =     base64.b64encode(json.dumps(worker_ignition).encode()) 
 data.parameters.sshKeyData.value     =     sshkey.rstrip()
 data.parameters.image.value          =     'https://sa' + url + '.blob.core.windows.net/vhd/rhcos.vhd'
 
