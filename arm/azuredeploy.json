@@ -108,7 +108,10 @@
         "Standard_GS2",
         "Standard_GS3",
         "Standard_GS4",
-        "Standard_GS5"
+        "Standard_GS5",
+        "Standard_D2s_v3",
+        "Standard_D4s_v3",
+        "Standard_D8s_v3"
       ],
       "metadata" : {
         "description" : "The size of the Master Virtual Machine."
@@ -180,7 +183,10 @@
         "Standard_GS2",
         "Standard_GS3",
         "Standard_GS4",
-        "Standard_GS5"
+        "Standard_GS5",
+        "Standard_D2s_v3",
+        "Standard_D4s_v3",
+        "Standard_D8s_v3"
       ],
       "metadata" : {
         "description" : "The size of the each Node Virtual Machine."
@@ -416,6 +422,15 @@
         "storageAccountType" : "Premium_LRS"
       },
       "Standard_GS5" : {
+        "storageAccountType" : "Premium_LRS"
+      },
+      "Standard_D2s_v3" : {
+        "storageAccountType" : "Premium_LRS"
+      },
+      "Standard_D4s_v3" : {
+        "storageAccountType" : "Premium_LRS"
+      },
+      "Standard_D8s_v3" : {
         "storageAccountType" : "Premium_LRS"
       }
     },
