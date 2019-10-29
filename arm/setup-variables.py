@@ -33,5 +33,5 @@ data.parameters.sshKeyData.value     =     sshkey.rstrip()
 data.parameters.image.value          =     'https://sa' + region + '.blob.core.windows.net/vhd/rhcos.vhd'
 
 with open("runit.parameters.json", "w") as jsonFile:
-    json.dump(data, jsonFile)
+    json.dump(data.decode(), jsonFile)
 
