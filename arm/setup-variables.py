@@ -29,7 +29,7 @@ data.parameters.BootstrapIgnition.value =  base64.b64encode(ignstr.encode())
 data.parameters.MasterIgnition.value =     base64.b64encode(json.dumps(master_ignition)) 
 data.parameters.WorkerIgnition.value =     base64.b64encode(json.dumps(worker_ignition)) 
 data.parameters.sshKeyData.value     =     sshkey.rstrip()
-data.parameters.image                =     'https://' + url + '.blob.core.windows.net/vhd/rhcos.vhd'
+data.parameters.image.value          =     'https://' + url + '.blob.core.windows.net/vhd/rhcos.vhd'
 
 with open("runit.parameters.json", "w") as jsonFile:
     json.dump(data, jsonFile)
