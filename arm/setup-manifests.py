@@ -22,9 +22,11 @@ with open('./gw/manifests/cloud-provider-config.yaml') as file:
       jsondata = json.dumps(dict(**config.toDict()),indent='\t')
       jsonstr = str(jsondata)
       yamlx['data']['config'] =   jsonstr + '\n'
-      yamlx['metadata']['creationTimestamp'] = ''
+      yamlx['metadata']['creationTimestamp'] = None
+      yamlstr = yaml.dump(yamlx, default_style='\"', width=4096)
+      yamlstr = yamlstr.replace('!!null "null"','null')
       with open('./gw/manifests/cloud-provider-config.yaml', 'w') as outfile:
-          yaml.dump(yamlx, outfile, default_style='\"', width=4096)
+          outfile.write(yamlstr)
 
 with open('./gw/manifests/cluster-infrastructure-02-config.yml') as file:
       yamlx = yaml.load(file)
