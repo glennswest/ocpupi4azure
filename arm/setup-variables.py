@@ -26,9 +26,9 @@ with open("azuredeploy.parameters.json", "r") as jsonFile:
     data = DotMap(json.load(jsonFile))
 
 
-data.parameters.BootstrapIgnition.value =  base64.b64encode(ignstr.encode())
-data.parameters.MasterIgnition.value =     base64.b64encode(json.dumps(master_ignition).encode()) 
-data.parameters.WorkerIgnition.value =     base64.b64encode(json.dumps(worker_ignition).encode()) 
+data.parameters.BootstrapIgnition.value =  base64.b64encode(ignstr.encode()).decode()
+data.parameters.MasterIgnition.value =     base64.b64encode(json.dumps(master_ignition).encode()).decode()
+data.parameters.WorkerIgnition.value =     base64.b64encode(json.dumps(worker_ignition).encode()).decode()
 data.parameters.sshKeyData.value     =     sshkey.rstrip()
 data.parameters.image.value          =     'https://sa' + region + '.blob.core.windows.net/vhd/rhcos.vhd'
 
