@@ -32,6 +32,7 @@ data.parameters.WorkerIgnition.value =     base64.b64encode(json.dumps(worker_ig
 data.parameters.sshKeyData.value     =     sshkey.rstrip()
 data.parameters.image.value          =     'https://sa' + region + '.blob.core.windows.net/vhd/rhcos.vhd'
 
+jsondata = dict(**data.toDict())
 with open("runit.parameters.json", "w") as jsonFile:
-    json.dump(data.decode(), jsonFile)
+    json.dump(jsondata, jsonFile)
 
