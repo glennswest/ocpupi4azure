@@ -12,6 +12,7 @@ with open('./gw/manifests/cloud-provider-config.yaml') as file:
       yamlx = yaml.load(file)
       jsondata = yamlx['data']['config']
       jsonx = json.loads(jsondata,object_pairs_hook=OrderedDict)
+      print(jsonx)
       config = DotMap(jsonx)
       config.resourceGroup = resource_group
       config.vnetName = "openshiftVnet"
@@ -19,9 +20,9 @@ with open('./gw/manifests/cloud-provider-config.yaml') as file:
       config.subnetName = "masterSubnet"
       config.securityGroupName = "master1nsg"
       config.routeTableName = ""
-      jsondata = json.dumps(dict(**config.toDict()))
-      jsonstr = jsondata.replace('"', r'\"')
-      yamlx['data']['config'] =   jsonstr
+      jsondata = json.dumps(dict(**config.toDict()),indent='\t')
+      print (jsondata)
+      yamlx['data']['config'] =   jsondata + '\n'
       with open('./gw/manifests/cloud-provider-config.yaml', 'w') as outfile:
           yaml.dump(yamlx, outfile, default_flow_style=False)
 
