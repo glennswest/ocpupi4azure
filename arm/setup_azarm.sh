@@ -7,6 +7,7 @@ cp install-config.yaml gw
 mkdir -p gw/archive/manifests/original
 cp gw/manifests/* gw/archive/manifests/original
 python3 setup-manifests.py $1
+./setup-nodeport.sh
 cp gw/manifests/* gw/archive/manifests/
 read -p "Press [Enter] to start after manifests"
 ./openshift-install create ignition-configs --dir=gw
