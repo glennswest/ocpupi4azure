@@ -32,7 +32,7 @@ with open('./gw/manifests/cloud-provider-config.yaml') as file:
 with open('./gw/manifests/cluster-infrastructure-02-config.yml') as file:
       yamlx = yaml.load(file)
       yamlx['status']['platformStatus']['azure']['resourceGroupName'] = resource_group   
-      yamlx['status']['platformStatus']['infrastructureName'] = resource_group
+      yamlx['status']['infrastructureName'] = resource_group
       with open('./gw/manifests/cluster-infrastructure-02-config.yml','w') as outfile:
           yaml.dump(yamlx, outfile, default_flow_style=False)
 
