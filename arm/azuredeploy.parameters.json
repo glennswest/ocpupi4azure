@@ -21,10 +21,10 @@
       "value" : ""
     },
     "masterVMSize" : {
-      "value" : "Standard_DS3"
+      "value" : "Standard_D2s_v3"
     },
     "nodeVMSize" : {
-      "value" : "Standard_DS3"
+      "value" : "Standard_D2s_v3"
     }
   }
 }
