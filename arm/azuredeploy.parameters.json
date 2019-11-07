@@ -15,16 +15,10 @@
       "value" : ""
     },
     "numberOfNodes" : {
-      "value" : 2
+      "value" : 3
     },
     "sshKeyData" : {
       "value" : ""
-    },
-    "masterVMSize" : {
-      "value" : "Standard_D2s_v3"
-    },
-    "nodeVMSize" : {
-      "value" : "Standard_D2s_v3"
     }
   }
 }
