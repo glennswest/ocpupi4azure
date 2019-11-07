@@ -15,10 +15,8 @@ cp gw/manifests/* gw/archive/manifests/
 cp gw/auth/kubeconfig ~/.kube/config
 echo "Delete old resource group"
 az group delete --name $1 --yes
-az group delete --name $1_rg --yes
 echo "Create new resource group"
 az group create --name $1 --location $AZREGION
-az group create --name $1_rg --location $AZREGION
 az identity create -g $1 -n ${1}_userid
 echo "Copy RHCOS to resource group"
 export VHD_URL=https://rhcos.blob.core.windows.net/imagebucket/
