@@ -19,6 +19,12 @@
     },
     "sshKeyData" : {
       "value" : ""
+    },
+    "masterVMSize" : {
+      "value" : "Standard_DS3"
+    },
+    "nodeVMSize" : {
+      "value" : "Standard_DS3"
     }
   }
 }
