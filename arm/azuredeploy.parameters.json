@@ -19,6 +19,12 @@
     },
     "sshKeyData" : {
       "value" : ""
+    },
+    "masterVMSize" : {
+      "value" : "Standard_D8s_v3"
+    },
+    "nodeVMSize" : {
+      "value" : "Standard_D4s_v3"
     }
   }
 }
