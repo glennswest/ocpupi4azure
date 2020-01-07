@@ -1,7 +1,16 @@
 #!/bin/bash
-set -e
+#set -e
 echo "Using resource group $1"
 echo "Using dns domain $2"
+az network vnet create \
+  --name openshiftVnet \
+  --resource-group $1 \
+  --location centralus \
+  --address-prefix 10.0.0.0/16 \
+  --subnet-name nodeSubnet \
+  --subnet-prefixes 10.0.1.0/24 \
+  --subnet-name masterSubnet \
+  --subnet-prefixes 10.0.0.0/24
 echo "Creating private dns settings"
 az network private-dns zone create -g $1 -n $2
 az network private-dns link vnet create -g $1 -n ${1}DNSLink -z $2 -v openshiftVnet -e true
@@ -13,7 +22,8 @@ export MASTERIP=`az network public-ip show --resource-group $1 --name $1 --query
 export APPIP=`az network public-ip show --resource-group $1 --name ${1}app --query [ipAddress] --output tsv`
 az network private-dns record-set a add-record -g $1 -z $2 -n api -a ${MASTERIP}
 az network private-dns record-set a add-record -g $1 -z $2 -n *.apps -a ${APPIP}
-export INTLBIP=`az network lb frontend-ip show -g $1 --lb-name ${1}intlb -n LoadBalancerFrontEnd --query [privateIpAddress] --output tsv`
+#export INTLBIP=`az network lb frontend-ip show -g $1 --lb-name ${1}intlb -n LoadBalancerFrontEnd --query [privateIpAddress] --output tsv`
+export INTLBIP="10.0.0.63"
 az network private-dns record-set a add-record -g $1 -z $2 -n api-int -a ${INTLBIP}
 az network private-dns record-set list -g gswx1 -z gw.ncc9.com
 echo "Creating Public DNS"
@@ -21,6 +31,5 @@ az network dns zone create -g $1 -n $2
 az network dns record-set a add-record -g $1 -z $2 -n api -a ${MASTERIP}
 az network dns record-set a add-record -g $1 -z $2 -n *.apps -a ${APPIP}
 export DNSSERVNAME=`az network dns record-set ns show --resource-group $1 --zone-name $2 --name @ --query "nsRecords[0].nsdname" --output tsv`
-echo "Please add "${DNSSERVNAME}"to your dns resolver settings"
-
+az network private-dns record-set list -g gswx1 -z gw.ncc9.com
 

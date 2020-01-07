@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+#set -e
 echo "Using resource group $1"
 export AZREGION="centralus"
 rm -r -f gw
