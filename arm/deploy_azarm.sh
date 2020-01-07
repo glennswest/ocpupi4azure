@@ -12,12 +12,12 @@ then
    exit $?
 fi
 echo "Adding internal entries for etcd"
-export NODE01IP=`az vm show -g $1 -n node01 -d --query privateIps --output tsv`
-export NODE02IP=`az vm show -g $1 -n node02 -d --query privateIps --output tsv`
-export NODE03IP=`az vm show -g $1 -n node03 -d --query privateIps --output tsv`
-az network private-dns record-set a add-record -g $1 -z $2 -n etcd-0 -a ${NODE01IP}
-az network private-dns record-set a add-record -g $1 -z $2 -n etcd-1 -a ${NODE02IP}
-az network private-dns record-set a add-record -g $1 -z $2 -n etcd-2 -a ${NODE03IP}
+export MASTER1IP=`az vm show -g $1 -n master1 -d --query privateIps --output tsv`
+export MASTER2IP=`az vm show -g $1 -n master2 -d --query privateIps --output tsv`
+export MASTER3IP=`az vm show -g $1 -n master3 -d --query privateIps --output tsv`
+az network private-dns record-set a add-record -g $1 -z $2 -n etcd-0 -a ${MASTER1IP}
+az network private-dns record-set a add-record -g $1 -z $2 -n etcd-1 -a ${MASTER2IP}
+az network private-dns record-set a add-record -g $1 -z $2 -n etcd-2 -a ${MASTER3IP}
 ./openshift-install --dir=gw wait-for bootstrap-complete --log-level debug
 az vm stop --resource-group $1 --name bootstrap-0
 az vm deallocate --resource-group $1 --name bootstrap-0 --no-wait
