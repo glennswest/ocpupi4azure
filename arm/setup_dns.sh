@@ -17,7 +17,7 @@ az network private-dns link vnet create -g $1 -n ${1}DNSLink -z $2 -v openshiftV
 az network private-dns record-set srv add-record -g $1 -z $2  -n _etcd-server-ssl._tcp.${2} -t master1.${2} -p 1 -w 1 -r 2380
 az network private-dns record-set srv add-record -g $1 -z $2  -n _etcd-server-ssl._tcp.${2} -t master2.${2} -p 1 -w 1 -r 2380
 az network private-dns record-set srv add-record -g $1 -z $2  -n _etcd-server-ssl._tcp.${2} -t master3.${2} -p 1 -w 1 -r 2380
-az network private-dns record-set srv add-record -g $1 -z $2  -n _etcd-server-ssl._tcp.${2} -t ${1}m1.${2} -p 1 -w 1 -r 2380
+az network private-dns record-set srv add-record -g $1 -z $2  -n _etcd-server-ssl._tcp.${2} -t bootstrap-0.${2} -p 1 -w 1 -r 2380
 export MASTERIP=`az network public-ip show --resource-group $1 --name $1 --query [ipAddress] --output tsv`
 export APPIP=`az network public-ip show --resource-group $1 --name ${1}app --query [ipAddress] --output tsv`
 az network private-dns record-set a add-record -g $1 -z $2 -n api -a ${MASTERIP}

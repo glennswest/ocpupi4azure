@@ -19,7 +19,7 @@ export BOOTSTRAPIP=`az vm show -g $1 -n bootstrap-0 -d --query privateIps --outp
 az network private-dns record-set a add-record -g $1 -z $2 -n etcd-0 -a ${MASTER1IP}
 az network private-dns record-set a add-record -g $1 -z $2 -n etcd-1 -a ${MASTER2IP}
 az network private-dns record-set a add-record -g $1 -z $2 -n etcd-2 -a ${MASTER3IP}
-az network private-dns record-set a add-record -g $1 -z $2 -n ${1}m1 -a ${BOOTSTRAPIP}
+az network private-dns record-set a add-record -g $1 -z $2 -n bootstrap-0 -a ${BOOTSTRAPIP}
 ./openshift-install --dir=gw wait-for bootstrap-complete --log-level debug
 az vm stop --resource-group $1 --name bootstrap-0
 az vm deallocate --resource-group $1 --name bootstrap-0 --no-wait
