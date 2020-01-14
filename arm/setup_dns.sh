@@ -17,7 +17,6 @@ az network dns record-set a add-record -g $1 -z $2 -n bootstrap-0  -a 10.0.0.4
 az network dns record-set a add-record -g $1 -z $2 -n master1 -a 10.0.0.5
 az network dns record-set a add-record -g $1 -z $2 -n master2 -a 10.0.0.6
 az network dns record-set a add-record -g $1 -z $2 -n master3 -a 10.0.0.7
-#az network dns link vnet create -g $1 -n ${1}DNSLink -z $2 -v openshiftVnet -e true
 az network dns record-set srv add-record -g $1 -z $2  -n _etcd-server-ssl._tcp.${2} -t master1.${2} -p 1 -w 1 -r 2380
 az network dns record-set srv add-record -g $1 -z $2  -n _etcd-server-ssl._tcp.${2} -t master2.${2} -p 1 -w 1 -r 2380
 az network dns record-set srv add-record -g $1 -z $2  -n _etcd-server-ssl._tcp.${2} -t master3.${2} -p 1 -w 1 -r 2380

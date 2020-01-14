@@ -12,10 +12,6 @@ then
    exit $?
 fi
 echo "Adding internal entries for etcd"
-export MASTER1IP=`az vm show -g $1 -n master1 -d --query privateIps --output tsv`
-export MASTER2IP=`az vm show -g $1 -n master2 -d --query privateIps --output tsv`
-export MASTER3IP=`az vm show -g $1 -n master3 -d --query privateIps --output tsv`
-export BOOTSTRAPIP=`az vm show -g $1 -n bootstrap-0 -d --query privateIps --output tsv`
 ./openshift-install --dir=gw wait-for bootstrap-complete --log-level debug
 az vm stop --resource-group $1 --name bootstrap-0
 az vm deallocate --resource-group $1 --name bootstrap-0 --no-wait
