@@ -11,6 +11,7 @@ then
    echo "Deployment Failed"
    exit $?
 fi
+exit
 echo "Adding internal entries for etcd"
 ./openshift-install --dir=gw wait-for bootstrap-complete --log-level debug
 az vm stop --resource-group $1 --name bootstrap-0
