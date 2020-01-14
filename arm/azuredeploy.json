@@ -479,36 +479,6 @@
       }
     },
     {
-      "apiVersion" : "[variables('apiVersion')]",
-      "type" : "Microsoft.Network/virtualNetworks",
-      "name" : "[variables('virtualNetworkName')]",
-      "location" : "[variables('location')]",
-      "tags" : {
-        "displayName" : "VirtualNetwork"
-      },
-      "properties" : {
-        "addressSpace" : {
-          "addressPrefixes" : [
-            "[variables('addressPrefix')]"
-          ]
-        },
-        "subnets" : [
-          {
-            "name" : "[variables('nodesubnetName')]",
-            "properties" : {
-              "addressPrefix" : "[variables('nodesubnetPrefix')]"
-            }
-          },
-          {
-            "name" : "[variables('mastersubnetName')]",
-            "properties" : {
-              "addressPrefix" : "[variables('mastersubnetPrefix')]"
-            }
-          }
-        ]
-      }
-    },
-    {
       "name" : "bootstrap",
       "type" : "Microsoft.Resources/deployments",
       "apiVersion" : "2015-01-01",
