@@ -26,5 +26,8 @@
     "nodeVMSize" : {
       "value" : "Standard_D8s_v3"
     }
+    "dnsip" : {
+      "value" : ""
+    }
   }
 }

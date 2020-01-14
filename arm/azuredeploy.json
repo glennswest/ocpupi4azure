@@ -191,6 +191,13 @@
       "metadata" : {
         "description" : "The size of the each Node Virtual Machine."
       }
+    },
+    "dnsip" : {
+      "type" : "string",
+      "minLength" : 1,
+      "metadata" : {
+        "description" : "DNS Server for cluster"
+      }
     }
   },
   "variables" : {
@@ -490,6 +497,11 @@
         "addressSpace" : {
           "addressPrefixes" : [
             "[variables('addressPrefix')]"
+          ]
+        },
+        "dhcpOptions" : {
+          "dnsServers" : [
+            "[parameters('dnsip')]"
           ]
         },
         "subnets" : [
@@ -1070,4 +1082,3 @@
     }
   }
 }
-

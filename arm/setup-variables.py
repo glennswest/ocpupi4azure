@@ -6,6 +6,7 @@ from dotmap import DotMap
 
 url = sys.argv[1]
 region = sys.argv[2]
+dnsip = sys.argv[3]
 
 ign = DotMap()
 config = DotMap()
@@ -31,6 +32,7 @@ data.parameters.MasterIgnition.value =     base64.b64encode(json.dumps(master_ig
 data.parameters.WorkerIgnition.value =     base64.b64encode(json.dumps(worker_ignition).encode()).decode()
 data.parameters.sshKeyData.value     =     sshkey.rstrip()
 data.parameters.image.value          =     'https://sa' + region + '.blob.core.windows.net/vhd/rhcos.vhd'
+data.parameters.dnsip.value          =     dnsip
 
 jsondata = dict(**data.toDict())
 with open("runit.parameters.json", "w") as jsonFile:

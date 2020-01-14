@@ -2,6 +2,11 @@
 #set -e
 echo "Using resource group $1"
 echo "Using dns domain $2"
+echo "Creating Public DNS"
+az network dns zone create -g $1 -n $2 
+vdnsserv=`az network dns record-set ns show -g $1 -z $2 -n @ --query 'nsRecords[0].nsdname' -o tsv`
+vdnsip=`dig +short ${vdnsserv}`
+#az network vnet update -g $1 -n openshiftVnet --dns-servers ${vdnsip}
 az network vnet create \
   --name openshiftVnet \
   --resource-group $1 \
@@ -10,9 +15,8 @@ az network vnet create \
   --subnet-name nodeSubnet \
   --subnet-prefixes 10.0.1.0/24 \
   --subnet-name masterSubnet \
-  --subnet-prefixes 10.0.0.0/24 
-echo "Creating Public DNS"
-az network dns zone create -g $1 -n $2 
+  --subnet-prefixes 10.0.0.0/24 \
+  --dns-servers ${vdnsip}
 az network dns record-set a add-record -g $1 -z $2 -n bootstrap-0  -a 10.0.0.4
 az network dns record-set a add-record -g $1 -z $2 -n master1 -a 10.0.0.5
 az network dns record-set a add-record -g $1 -z $2 -n master2 -a 10.0.0.6
@@ -30,9 +34,5 @@ az network dns record-set list -g gswx1 -z gw.ncc9.com
 az network dns zone create -g $1 -n $2
 az network dns record-set a add-record -g $1 -z $2 -n api -a ${MASTERIP}
 az network dns record-set a add-record -g $1 -z $2 -n *.apps -a ${APPIP}
-vdnsserv=`az network dns record-set ns show -g $1 -z $2 -n @ --query 'nsRecords[0].nsdname' -o tsv`
-vdnsip=`dig +short ${vdnsserv}`
-echo "Update Vnet"
-az network vnet update -g $1 -n openshiftVnet --dns-servers ${vdnsip}
 az network dns record-set list -g gswx1 -z gw.ncc9.com
 
