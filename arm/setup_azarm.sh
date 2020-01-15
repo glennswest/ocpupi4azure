@@ -41,10 +41,10 @@ az storage container create --name files --account-name sa${1} --public-access b
 ACCOUNT_KEY=$(az storage account keys list --account-name sa${1} --resource-group $1 --query "[0].value" -o tsv)
 az storage blob upload --account-name sa$1 --account-key $ACCOUNT_KEY -c "files" -f "gw/bootstrap.ign" -n "bootstrap.ign"
 BOOTSTRAPURL=$(az storage blob url --account-name sa$1 --account-key $ACCOUNT_KEY -c "files" -n "bootstrap.ign" -o tsv)
-./setup_dns.sh $1 $2
-vdnsserv=`az network dns record-set ns show -g $1 -z $2 -n @ --query 'nsRecords[0].nsdname' -o tsv`
-vdnsip=`dig +short ${vdnsserv}`
-python3 setup-variables.py $BOOTSTRAPURL $1 $vdnsip
+./setup_private_dns.sh $1 $2
+#vdnsserv=`az network dns record-set ns show -g $1 -z $2 -n @ --query 'nsRecords[0].nsdname' -o tsv`
+#vdnsip=`dig +short ${vdnsserv}`
+python3 setup-variables.py $BOOTSTRAPURL $1 ""
 
 az network public-ip create -g $1 -n $1 --allocation-method static
 az network public-ip create -g $1 -n $1app --allocation-method static
