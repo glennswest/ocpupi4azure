@@ -194,7 +194,6 @@
     },
     "dnsip" : {
       "type" : "string",
-      "minLength" : 0,
       "metadata" : {
         "description" : "DNS Server for cluster"
       }
