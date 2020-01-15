@@ -191,12 +191,6 @@
       "metadata" : {
         "description" : "The size of the each Node Virtual Machine."
       }
-    },
-    "dnsip" : {
-      "type" : "string",
-      "metadata" : {
-        "description" : "DNS Server for cluster"
-      }
     }
   },
   "variables" : {
