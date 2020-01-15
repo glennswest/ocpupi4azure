@@ -499,9 +499,7 @@
           ]
         },
         "dhcpOptions" : {
-          "dnsServers" : [
-            "[parameters('dnsip')]"
-          ]
+          "dnsServers" : []
         },
         "subnets" : [
           {
