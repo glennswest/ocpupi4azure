@@ -58,7 +58,7 @@
       "properties" : {
         "ipConfigurations" : [
           {
-            "name" : "ipconfig1",
+            "name" : "pipConfip",
             "properties" : {
               "privateIPAllocationMethod" : "Dynamic",
               "subnet" : {

@@ -65,7 +65,7 @@
       "properties" : {
         "ipConfigurations" : [
           {
-            "name" : "ipconfig1",
+            "name" : "pipConfig",
             "properties" : {
               "privateIPAllocationMethod" : "Static",
               "privateIPAddress" : "[parameters('ipAddress')]",
